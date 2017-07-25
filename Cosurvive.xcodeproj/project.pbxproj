@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D10448F71F278B180057488D /* BasicEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = D10448F61F278B180057488D /* BasicEnemy.m */; };
+		D10448F91F278EAF0057488D /* BasicEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = D10448F81F278EAF0057488D /* BasicEnemy.m */; };
+		D10448FD1F27D9020057488D /* JoystickNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D10448FC1F27D9020057488D /* JoystickNode.m */; };
 		D16690901F26D1C000FE430A /* GameConfigurations.m in Sources */ = {isa = PBXBuildFile; fileRef = D166908F1F26D1C000FE430A /* GameConfigurations.m */; };
 		D16690931F26F0CB00FE430A /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D16690921F26F0CB00FE430A /* GameManager.m */; };
 		D16B75E91F22FAC90047A475 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B75E81F22FAC90047A475 /* Player.m */; };
 		D16B75EF1F22FC990047A475 /* Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B75EE1F22FC990047A475 /* Unit.m */; };
 		D16B760A1F265B130047A475 /* AnimationComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B76091F265B130047A475 /* AnimationComponent.m */; };
-		D16B760D1F267D9C0047A475 /* EnemyAgentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B760C1F267D9C0047A475 /* EnemyAgentNode.m */; };
 		D19CC14C1F22CA4C00E97820 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D19CC14B1F22CA4C00E97820 /* main.m */; };
 		D19CC14F1F22CA4C00E97820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D19CC14E1F22CA4C00E97820 /* AppDelegate.m */; };
 		D19CC1511F22CA4C00E97820 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D19CC1501F22CA4C00E97820 /* GameScene.sks */; };
@@ -29,10 +29,13 @@
 		D1CA64901F26B59700C40FA7 /* PhysicsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */; };
 		D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */; };
 		D1CA649F1F26C4DC00C40FA7 /* MovementComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */; };
+		D1FECA861F28001C00DE1B96 /* HealthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FECA851F28001C00DE1B96 /* HealthComponent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D10448F61F278B180057488D /* BasicEnemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicEnemy.m; sourceTree = "<group>"; };
+		D10448F81F278EAF0057488D /* BasicEnemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicEnemy.m; sourceTree = "<group>"; };
+		D10448FB1F27D9020057488D /* JoystickNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JoystickNode.h; sourceTree = "<group>"; };
+		D10448FC1F27D9020057488D /* JoystickNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoystickNode.m; sourceTree = "<group>"; };
 		D166908A1F26CCD500FE430A /* BasicEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicEnemy.h; sourceTree = "<group>"; };
 		D166908E1F26D1C000FE430A /* GameConfigurations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfigurations.h; sourceTree = "<group>"; };
 		D166908F1F26D1C000FE430A /* GameConfigurations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConfigurations.m; sourceTree = "<group>"; };
@@ -44,8 +47,6 @@
 		D16B75EE1F22FC990047A475 /* Unit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unit.m; sourceTree = "<group>"; };
 		D16B76081F265B130047A475 /* AnimationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationComponent.h; sourceTree = "<group>"; };
 		D16B76091F265B130047A475 /* AnimationComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationComponent.m; sourceTree = "<group>"; };
-		D16B760B1F267D9C0047A475 /* EnemyAgentNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyAgentNode.h; sourceTree = "<group>"; };
-		D16B760C1F267D9C0047A475 /* EnemyAgentNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyAgentNode.m; sourceTree = "<group>"; };
 		D19CC1471F22CA4C00E97820 /* Cosurvive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cosurvive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D19CC14B1F22CA4C00E97820 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D19CC14D1F22CA4C00E97820 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -71,6 +72,8 @@
 		D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityPhysics.m; sourceTree = "<group>"; };
 		D1CA649D1F26C4DC00C40FA7 /* MovementComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovementComponent.h; sourceTree = "<group>"; };
 		D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovementComponent.m; sourceTree = "<group>"; };
+		D1FECA841F28001C00DE1B96 /* HealthComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthComponent.h; sourceTree = "<group>"; };
+		D1FECA851F28001C00DE1B96 /* HealthComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthComponent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D10448FA1F27D8E10057488D /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				D10448FB1F27D9020057488D /* JoystickNode.h */,
+				D10448FC1F27D9020057488D /* JoystickNode.m */,
+			);
+			name = Nodes;
+			sourceTree = "<group>";
+		};
 		D166908D1F26D1AA00FE430A /* Game Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,9 +115,7 @@
 				D16B75E71F22FAC90047A475 /* Player.h */,
 				D16B75E81F22FAC90047A475 /* Player.m */,
 				D166908A1F26CCD500FE430A /* BasicEnemy.h */,
-				D10448F61F278B180057488D /* BasicEnemy.m */,
-				D16B760B1F267D9C0047A475 /* EnemyAgentNode.h */,
-				D16B760C1F267D9C0047A475 /* EnemyAgentNode.m */,
+				D10448F81F278EAF0057488D /* BasicEnemy.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -115,6 +125,8 @@
 			children = (
 				D16B76081F265B130047A475 /* AnimationComponent.h */,
 				D16B76091F265B130047A475 /* AnimationComponent.m */,
+				D1FECA841F28001C00DE1B96 /* HealthComponent.h */,
+				D1FECA851F28001C00DE1B96 /* HealthComponent.m */,
 				D1CA649D1F26C4DC00C40FA7 /* MovementComponent.h */,
 				D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */,
 				D1CA648B1F26B2DF00C40FA7 /* RenderComponent.h */,
@@ -158,6 +170,7 @@
 				D19CC1521F22CA4C00E97820 /* Actions.sks */,
 				D16B75F31F261AD80047A475 /* Components */,
 				D16B75E61F22FAC00047A475 /* Entities */,
+				D10448FA1F27D8E10057488D /* Nodes */,
 				D166908D1F26D1AA00FE430A /* Game Settings */,
 				D19CC15D1F22CA4C00E97820 /* Assets.xcassets */,
 				D19CC14A1F22CA4C00E97820 /* Supporting Files */,
@@ -255,20 +268,21 @@
 			files = (
 				D19CC16C1F22CDE500E97820 /* MainMenu.m in Sources */,
 				D1CA64901F26B59700C40FA7 /* PhysicsComponent.m in Sources */,
-				D16B760D1F267D9C0047A475 /* EnemyAgentNode.m in Sources */,
 				D16B760A1F265B130047A475 /* AnimationComponent.m in Sources */,
 				D1CA648D1F26B2DF00C40FA7 /* RenderComponent.m in Sources */,
 				D16B75EF1F22FC990047A475 /* Unit.m in Sources */,
 				D19CC1591F22CA4C00E97820 /* GameViewController.m in Sources */,
+				D1FECA861F28001C00DE1B96 /* HealthComponent.m in Sources */,
 				D19CC14F1F22CA4C00E97820 /* AppDelegate.m in Sources */,
 				D19CC1561F22CA4C00E97820 /* GameScene.m in Sources */,
 				D16B75E91F22FAC90047A475 /* Player.m in Sources */,
-				D10448F71F278B180057488D /* BasicEnemy.m in Sources */,
 				D16690901F26D1C000FE430A /* GameConfigurations.m in Sources */,
 				D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */,
 				D16690931F26F0CB00FE430A /* GameManager.m in Sources */,
+				D10448F91F278EAF0057488D /* BasicEnemy.m in Sources */,
 				D19CC14C1F22CA4C00E97820 /* main.m in Sources */,
 				D1CA649F1F26C4DC00C40FA7 /* MovementComponent.m in Sources */,
+				D10448FD1F27D9020057488D /* JoystickNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

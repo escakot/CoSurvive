@@ -10,5 +10,10 @@
 
 @interface Player : Unit
 
+@property (strong, nonatomic) AnimationComponent *animationComponent;
+@property (strong, nonatomic) HealthComponent *healthComponent;
+@property (strong, nonatomic) PhysicsComponent *physicsComponent;
+
+- (instancetype)initWithScene:(SKScene*)scene andColor:(UIColor*)color;
 
 @end

@@ -9,27 +9,21 @@
 
 #import "GameScene.h"
 #import "GameManager.h"
-//Characters
-#import "Player.h"
-#import "BasicEnemy.h"
-#import "EnemyAgentNode.h"
 
-#import "AnimationComponent.h"
-#import "RenderComponent.h"
-#import "PhysicsComponent.h"
-#import "EntityPhysics.h"
+#import "JoystickNode.h"
 
 
-@interface GameScene () <SKPhysicsContactDelegate>
+@interface GameScene () <SKPhysicsContactDelegate, JoystickDelegate>
 
-@property (nonatomic, readwrite) GKComponentSystem *agentSystem;
+//@property (nonatomic, readwrite) GKComponentSystem *agentSystem;
 @property (nonatomic, readwrite) GKComponentSystem *animationSystem;
 
-@property (strong, nonatomic) Player *player;
-@property (strong, nonatomic) BasicEnemy *basicEnemy;
-@property (strong, nonatomic) BasicEnemy *basicEnemy2;
+@property (strong, nonatomic) NSMutableArray<Player*> *players;
+@property (strong, nonatomic) NSMutableDictionary* enemyUnits;
+@property (strong, nonatomic) NSMutableArray<BasicEnemy*>* basicEnemies;
 @property (strong, nonatomic) GameManager *gameManager;
-@property GKGoal *seekGoal;
+@property (strong, nonatomic) JoystickNode *joystick;
+@property (assign, nonatomic) BOOL joystickIsPressed;
 
 @end
 
@@ -49,30 +43,33 @@
 -(void)didMoveToView:(SKView *)view
 {
   //Game Configurations
-  self.gameManager = [[GameManager alloc] init];
-  self.gameManager.basicUnitRespawnTime = 0.5;
+  self.players = [[NSMutableArray alloc] init];
+  self.basicEnemies = [[NSMutableArray alloc] init];
+  self.enemyUnits = [[NSMutableDictionary alloc] init];
+  [self.enemyUnits setObject:self.basicEnemies forKey:@"basicEnemies"];
+  
   //Setup Component Systems
   self.agentSystem = [[GKComponentSystem alloc] initWithComponentClass:[GKAgent2D class]];
-//  self.agentSystem = [[GKComponentSystem alloc] init];
+  
   //Physics World
   self.physicsWorld.contactDelegate = self;
-  self.player = [[Player alloc] init];
-  [self.gameManager.players addObject:self.player];
-//  GKAgent2D *agent = [[GKAgent2D alloc] init];
-//  GKGoal *goal = [GKGoal goalToSeekAgent:self.player.agent];
-//  agent.behavior = [GKBehavior behaviorWithGoal:goal weight:1.0];
-
   
-  self.basicEnemy = [[BasicEnemy alloc] initWithColor:self.player.color atPosition:CGPointMake(-150,150) withTarget:self.player.agent];
+  //Players
+  Player* player = [[Player alloc] initWithScene:self andColor:[UIColor redColor]];
+  [self.players addObject:player];
   
-  self.basicEnemy2 = [[BasicEnemy alloc] initWithColor:[UIColor redColor] atPosition:CGPointMake(-150,-150) withTarget:self.player.agent];
+  for (Player* player in self.players)
+  {
+    [self.agentSystem addComponent:player.agent];
+    [self.entities addObject:player];
+  }
   
-  [self addChild:self.player.renderComponent.node];
-  [self.agentSystem addComponent:self.player.agent];
-  [self.agentSystem addComponent:self.basicEnemy2.agent];
-  [self addChild:self.basicEnemy2.renderComponent.node];
-  [self addChild:self.basicEnemy.renderComponent.node];
-  [self.agentSystem addComponent:self.basicEnemy.agent];
+  //Joystick
+  self.joystick = [[JoystickNode alloc] initWithSize:CGSizeMake(100.0, 100.0)];
+  self.joystick.userInteractionEnabled = YES;
+  self.joystick.delegate = self;
+  self.joystick.position = CGPointMake(-self.size.width/2 + 100, -self.size.height/2 + 100);
+  [self addChild:self.joystick];
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
@@ -80,13 +77,22 @@
   if (contact.bodyA.categoryBitMask == enemyCategory)
   {
     [contact.bodyA.node removeFromParent];
+    BasicEnemy *enemyBody = (BasicEnemy*)contact.bodyA.node.entity;
+    [self.basicEnemies removeObject:enemyBody];
+    [self.agentSystem removeComponent:enemyBody.agent];
+    Player * playerBody = (Player*)contact.bodyB.node.entity;
+    playerBody.healthComponent.healthPoints -= 10;
   } else {
     [contact.bodyB.node removeFromParent];
+    BasicEnemy *enemyBody = (BasicEnemy*)contact.bodyB.node.entity;
+    [self.basicEnemies removeObject:enemyBody];
+    [self.agentSystem removeComponent:enemyBody.agent];
+    Player * playerBody = (Player*)contact.bodyA.node.entity;
+    playerBody.healthComponent.healthPoints -= 10;
   }
 }
 
 - (void)touchDownAtPoint:(CGPoint)pos {
-  self.player.agent.position = (vector_float2){pos.x, pos.y};
 }
 
 - (void)touchMovedToPoint:(CGPoint)pos {
@@ -102,11 +108,6 @@
   for (UITouch *t in touches) {[self touchMovedToPoint:[t locationInNode:self]];}
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-//  self.seeking = YES;
-//  CGPoint position = [touches.anyObject locationInNode:self];
-//  self.trackingAgent.position = (vector_float2){position.x, position.y};
-  
-  
   for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
 }
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -124,34 +125,28 @@
   // Calculate time since last update
   CGFloat dt = currentTime - _lastUpdateTime;
   
+  [[GameManager sharedManager] spawnUnitsInScene:self players:self.players units:self.enemyUnits time:dt];
 //  NSLog(@"%f", self.size.width);
   // Update entities
-//  for (GKEntity *entity in self.entities) {
-//    [entity updateWithDeltaTime:dt];
-//  }
-  [self spawnBasicEnemy];
+  for (GKEntity *entity in self.entities) {
+    [entity updateWithDeltaTime:dt];
+  }
   
   _lastUpdateTime = currentTime;
 //  [self.animationSystem updateWithDeltaTime:dt];
   [self.agentSystem updateWithDeltaTime:dt];
 }
 
-
--(void)spawnBasicEnemy
+-(void)updateJoystick:(JoystickNode *)joystick xValue:(float)x yValue:(float)y
 {
-  GKARC4RandomSource *randomSource = [[GKARC4RandomSource alloc] init];
-//  NSInteger randTarget = [randomSource nextIntWithUpperBound:self.players.count];
-  CGFloat x = ((float)self.size.width * randomSource.nextUniform) - self.size.width/2;
-  CGFloat y = ((float)self.size.height * randomSource.nextUniform) - self.size.height/2;
-  BasicEnemy *basicEnemy = [[BasicEnemy alloc] initWithColor:[UIColor redColor] atPosition:CGPointMake(x, y) withTarget:self.player.agent];
-  
-//  SKSpriteNode *node = [[SKSpriteNode alloc] initWithColor:self.player.color size:CGSizeMake(50, 50)];
-//  node.position = CGPointMake(x, y);
-//  [self addChild:node];
-  [self addChild:basicEnemy.renderComponent.node];
-  [self.agentSystem addComponent:basicEnemy.agent];
-  
+  Player *player = self.players[0];
+  player.xVelocity = x;
+  player.yVelocity = y;
 }
 
+- (void)isPressed:(JoystickNode *)joystick isPressed:(BOOL)pressed
+{
+  self.joystickIsPressed = pressed;
+}
 
 @end

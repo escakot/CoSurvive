@@ -10,7 +10,9 @@
 #import "RenderComponent.h"
 #import "AnimationComponent.h"
 #import "PhysicsComponent.h"
+#import "HealthComponent.h"
 #import "EntityPhysics.h"
+#import "GameScene.h"
 
 @interface Unit : GKEntity <GKAgentDelegate>
 
@@ -18,6 +20,8 @@
 @property (strong, nonatomic) UIColor *color;
 @property (strong, nonatomic) SKShapeNode *shape;
 @property (assign, nonatomic) float mass;
+@property (assign, nonatomic) float xVelocity;
+@property (assign, nonatomic) float yVelocity;
 @property (assign, nonatomic) float speed;
 @property (assign, nonatomic) float acceleration;
 @property (assign, nonatomic) float radius;

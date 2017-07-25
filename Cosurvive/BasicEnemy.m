@@ -10,7 +10,7 @@
 
 @implementation BasicEnemy
 
-- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target
+- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target andScene:(SKScene*)scene
 {
   self = [super init];
   if (self) {
@@ -44,7 +44,13 @@
     self.agent.behavior = [[GKBehavior alloc] init];
     GKGoal *goal = [GKGoal goalToSeekAgent:target];
     [self.agent.behavior setWeight:1.0 forGoal:goal];
-    
+    float angle = atan2(target.position.x - position.x, target.position.y - position.y) / M_PI * 180;
+    float corrected_angle = (angle - 90) * -1;
+//    self.agent.rotation = atan2(target.position.x - position.x, target.position.y - position.y);
+    corrected_angle = corrected_angle < 0 ? corrected_angle + 360 : corrected_angle;
+//    NSLog(@"%f", corrected_angle);
+    self.agent.rotation = corrected_angle * M_PI / 180;
+   
     //Drawing the shape of Basic Enemy
     CGPoint points[4];
     const static float triangleBackSideAngle = (135.0f / 360.0f) * (2 * M_PI);
@@ -57,6 +63,7 @@
     self.shape.zPosition = 1;
     self.shape.fillColor = color;
     [self.renderComponent.node addChild:self.shape];
+    [scene addChild:self.renderComponent.node];
   }
   return self;
 }
