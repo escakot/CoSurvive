@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D10448F71F278B180057488D /* BasicEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = D10448F61F278B180057488D /* BasicEnemy.m */; };
+		D16690901F26D1C000FE430A /* GameConfigurations.m in Sources */ = {isa = PBXBuildFile; fileRef = D166908F1F26D1C000FE430A /* GameConfigurations.m */; };
+		D16690931F26F0CB00FE430A /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D16690921F26F0CB00FE430A /* GameManager.m */; };
+		D16B75E91F22FAC90047A475 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B75E81F22FAC90047A475 /* Player.m */; };
+		D16B75EF1F22FC990047A475 /* Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B75EE1F22FC990047A475 /* Unit.m */; };
+		D16B760A1F265B130047A475 /* AnimationComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B76091F265B130047A475 /* AnimationComponent.m */; };
+		D16B760D1F267D9C0047A475 /* EnemyAgentNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B760C1F267D9C0047A475 /* EnemyAgentNode.m */; };
 		D19CC14C1F22CA4C00E97820 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D19CC14B1F22CA4C00E97820 /* main.m */; };
 		D19CC14F1F22CA4C00E97820 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D19CC14E1F22CA4C00E97820 /* AppDelegate.m */; };
 		D19CC1511F22CA4C00E97820 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = D19CC1501F22CA4C00E97820 /* GameScene.sks */; };
@@ -16,9 +23,29 @@
 		D19CC15C1F22CA4C00E97820 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19CC15A1F22CA4C00E97820 /* Main.storyboard */; };
 		D19CC15E1F22CA4C00E97820 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D19CC15D1F22CA4C00E97820 /* Assets.xcassets */; };
 		D19CC1611F22CA4C00E97820 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19CC15F1F22CA4C00E97820 /* LaunchScreen.storyboard */; };
+		D19CC1691F22CD3400E97820 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = D19CC1681F22CD3400E97820 /* MainMenu.sks */; };
+		D19CC16C1F22CDE500E97820 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D19CC16B1F22CDE500E97820 /* MainMenu.m */; };
+		D1CA648D1F26B2DF00C40FA7 /* RenderComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648C1F26B2DF00C40FA7 /* RenderComponent.m */; };
+		D1CA64901F26B59700C40FA7 /* PhysicsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */; };
+		D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */; };
+		D1CA649F1F26C4DC00C40FA7 /* MovementComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D10448F61F278B180057488D /* BasicEnemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicEnemy.m; sourceTree = "<group>"; };
+		D166908A1F26CCD500FE430A /* BasicEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicEnemy.h; sourceTree = "<group>"; };
+		D166908E1F26D1C000FE430A /* GameConfigurations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfigurations.h; sourceTree = "<group>"; };
+		D166908F1F26D1C000FE430A /* GameConfigurations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConfigurations.m; sourceTree = "<group>"; };
+		D16690911F26F0CB00FE430A /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
+		D16690921F26F0CB00FE430A /* GameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameManager.m; sourceTree = "<group>"; };
+		D16B75E71F22FAC90047A475 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		D16B75E81F22FAC90047A475 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		D16B75ED1F22FC990047A475 /* Unit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unit.h; sourceTree = "<group>"; };
+		D16B75EE1F22FC990047A475 /* Unit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unit.m; sourceTree = "<group>"; };
+		D16B76081F265B130047A475 /* AnimationComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimationComponent.h; sourceTree = "<group>"; };
+		D16B76091F265B130047A475 /* AnimationComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimationComponent.m; sourceTree = "<group>"; };
+		D16B760B1F267D9C0047A475 /* EnemyAgentNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnemyAgentNode.h; sourceTree = "<group>"; };
+		D16B760C1F267D9C0047A475 /* EnemyAgentNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnemyAgentNode.m; sourceTree = "<group>"; };
 		D19CC1471F22CA4C00E97820 /* Cosurvive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cosurvive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D19CC14B1F22CA4C00E97820 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D19CC14D1F22CA4C00E97820 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -33,6 +60,17 @@
 		D19CC15D1F22CA4C00E97820 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D19CC1601F22CA4C00E97820 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D19CC1621F22CA4C00E97820 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D19CC1681F22CD3400E97820 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
+		D19CC16A1F22CDE500E97820 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
+		D19CC16B1F22CDE500E97820 /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
+		D1CA648B1F26B2DF00C40FA7 /* RenderComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderComponent.h; sourceTree = "<group>"; };
+		D1CA648C1F26B2DF00C40FA7 /* RenderComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderComponent.m; sourceTree = "<group>"; };
+		D1CA648E1F26B59700C40FA7 /* PhysicsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsComponent.h; sourceTree = "<group>"; };
+		D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsComponent.m; sourceTree = "<group>"; };
+		D1CA649A1F26BDB900C40FA7 /* EntityPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityPhysics.h; sourceTree = "<group>"; };
+		D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityPhysics.m; sourceTree = "<group>"; };
+		D1CA649D1F26C4DC00C40FA7 /* MovementComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovementComponent.h; sourceTree = "<group>"; };
+		D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovementComponent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +84,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D166908D1F26D1AA00FE430A /* Game Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D1CA649A1F26BDB900C40FA7 /* EntityPhysics.h */,
+				D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */,
+				D166908E1F26D1C000FE430A /* GameConfigurations.h */,
+				D166908F1F26D1C000FE430A /* GameConfigurations.m */,
+			);
+			name = "Game Settings";
+			sourceTree = "<group>";
+		};
+		D16B75E61F22FAC00047A475 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				D16B75ED1F22FC990047A475 /* Unit.h */,
+				D16B75EE1F22FC990047A475 /* Unit.m */,
+				D16B75E71F22FAC90047A475 /* Player.h */,
+				D16B75E81F22FAC90047A475 /* Player.m */,
+				D166908A1F26CCD500FE430A /* BasicEnemy.h */,
+				D10448F61F278B180057488D /* BasicEnemy.m */,
+				D16B760B1F267D9C0047A475 /* EnemyAgentNode.h */,
+				D16B760C1F267D9C0047A475 /* EnemyAgentNode.m */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		D16B75F31F261AD80047A475 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D16B76081F265B130047A475 /* AnimationComponent.h */,
+				D16B76091F265B130047A475 /* AnimationComponent.m */,
+				D1CA649D1F26C4DC00C40FA7 /* MovementComponent.h */,
+				D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */,
+				D1CA648B1F26B2DF00C40FA7 /* RenderComponent.h */,
+				D1CA648C1F26B2DF00C40FA7 /* RenderComponent.m */,
+				D1CA648E1F26B59700C40FA7 /* PhysicsComponent.h */,
+				D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */,
+			);
+			name = Components;
+			sourceTree = "<group>";
+		};
 		D19CC13E1F22CA4C00E97820 = {
 			isa = PBXGroup;
 			children = (
@@ -65,18 +144,22 @@
 		D19CC1491F22CA4C00E97820 /* Cosurvive */ = {
 			isa = PBXGroup;
 			children = (
-				D19CC14D1F22CA4C00E97820 /* AppDelegate.h */,
-				D19CC14E1F22CA4C00E97820 /* AppDelegate.m */,
 				D19CC1501F22CA4C00E97820 /* GameScene.sks */,
-				D19CC1521F22CA4C00E97820 /* Actions.sks */,
+				D19CC1681F22CD3400E97820 /* MainMenu.sks */,
+				D19CC16A1F22CDE500E97820 /* MainMenu.h */,
+				D19CC16B1F22CDE500E97820 /* MainMenu.m */,
 				D19CC1541F22CA4C00E97820 /* GameScene.h */,
 				D19CC1551F22CA4C00E97820 /* GameScene.m */,
 				D19CC1571F22CA4C00E97820 /* GameViewController.h */,
 				D19CC1581F22CA4C00E97820 /* GameViewController.m */,
+				D16690911F26F0CB00FE430A /* GameManager.h */,
+				D16690921F26F0CB00FE430A /* GameManager.m */,
 				D19CC15A1F22CA4C00E97820 /* Main.storyboard */,
+				D19CC1521F22CA4C00E97820 /* Actions.sks */,
+				D16B75F31F261AD80047A475 /* Components */,
+				D16B75E61F22FAC00047A475 /* Entities */,
+				D166908D1F26D1AA00FE430A /* Game Settings */,
 				D19CC15D1F22CA4C00E97820 /* Assets.xcassets */,
-				D19CC15F1F22CA4C00E97820 /* LaunchScreen.storyboard */,
-				D19CC1621F22CA4C00E97820 /* Info.plist */,
 				D19CC14A1F22CA4C00E97820 /* Supporting Files */,
 			);
 			path = Cosurvive;
@@ -85,6 +168,10 @@
 		D19CC14A1F22CA4C00E97820 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D19CC1621F22CA4C00E97820 /* Info.plist */,
+				D19CC15F1F22CA4C00E97820 /* LaunchScreen.storyboard */,
+				D19CC14D1F22CA4C00E97820 /* AppDelegate.h */,
+				D19CC14E1F22CA4C00E97820 /* AppDelegate.m */,
 				D19CC14B1F22CA4C00E97820 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -122,6 +209,7 @@
 					D19CC1461F22CA4C00E97820 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 62G7WYJ46U;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -150,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D19CC15C1F22CA4C00E97820 /* Main.storyboard in Resources */,
+				D19CC1691F22CD3400E97820 /* MainMenu.sks in Resources */,
 				D19CC1511F22CA4C00E97820 /* GameScene.sks in Resources */,
 				D19CC15E1F22CA4C00E97820 /* Assets.xcassets in Resources */,
 				D19CC1611F22CA4C00E97820 /* LaunchScreen.storyboard in Resources */,
@@ -164,10 +253,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D19CC16C1F22CDE500E97820 /* MainMenu.m in Sources */,
+				D1CA64901F26B59700C40FA7 /* PhysicsComponent.m in Sources */,
+				D16B760D1F267D9C0047A475 /* EnemyAgentNode.m in Sources */,
+				D16B760A1F265B130047A475 /* AnimationComponent.m in Sources */,
+				D1CA648D1F26B2DF00C40FA7 /* RenderComponent.m in Sources */,
+				D16B75EF1F22FC990047A475 /* Unit.m in Sources */,
 				D19CC1591F22CA4C00E97820 /* GameViewController.m in Sources */,
 				D19CC14F1F22CA4C00E97820 /* AppDelegate.m in Sources */,
 				D19CC1561F22CA4C00E97820 /* GameScene.m in Sources */,
+				D16B75E91F22FAC90047A475 /* Player.m in Sources */,
+				D10448F71F278B180057488D /* BasicEnemy.m in Sources */,
+				D16690901F26D1C000FE430A /* GameConfigurations.m in Sources */,
+				D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */,
+				D16690931F26F0CB00FE430A /* GameManager.m in Sources */,
 				D19CC14C1F22CA4C00E97820 /* main.m in Sources */,
+				D1CA649F1F26C4DC00C40FA7 /* MovementComponent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,12 +390,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 62G7WYJ46U;
 				INFOPLIST_FILE = Cosurvive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.errolcheong.Cosurvive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -302,12 +406,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = 62G7WYJ46U;
 				INFOPLIST_FILE = Cosurvive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.errolcheong.Cosurvive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -330,6 +436,7 @@
 				D19CC1671F22CA4C00E97820 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
