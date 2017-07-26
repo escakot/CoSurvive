@@ -10,7 +10,7 @@
 
 @implementation BasicEnemy
 
-- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target andScene:(SKScene*)scene
+- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target withPhysics:(physicsBitMask)bitMask
 {
   self = [super init];
   if (self) {
@@ -26,7 +26,7 @@
     [self addComponent:self.renderComponent];
     
     SKPhysicsBody *playerPhysics = [SKPhysicsBody bodyWithRectangleOfSize:self.size];
-    PhysicsComponent *physicsComponent = [[PhysicsComponent alloc] initWithPhysicsBody:playerPhysics andPhysicsBitMask:[EntityPhysics enemy]];
+    PhysicsComponent *physicsComponent = [[PhysicsComponent alloc] initWithPhysicsBody:playerPhysics andPhysicsBitMask:bitMask];
     [self addComponent:physicsComponent];
     
     self.renderComponent.node.physicsBody = physicsComponent.physicsBody;
@@ -46,7 +46,6 @@
     [self.agent.behavior setWeight:1.0 forGoal:goal];
     float angle = atan2(target.position.x - position.x, target.position.y - position.y) / M_PI * 180;
     float corrected_angle = (angle - 90) * -1;
-//    self.agent.rotation = atan2(target.position.x - position.x, target.position.y - position.y);
     corrected_angle = corrected_angle < 0 ? corrected_angle + 360 : corrected_angle;
 //    NSLog(@"%f", corrected_angle);
     self.agent.rotation = corrected_angle * M_PI / 180;
@@ -63,7 +62,6 @@
     self.shape.zPosition = 1;
     self.shape.fillColor = color;
     [self.renderComponent.node addChild:self.shape];
-    [scene addChild:self.renderComponent.node];
   }
   return self;
 }

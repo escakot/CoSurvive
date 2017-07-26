@@ -10,8 +10,8 @@
 
 @interface HealthComponent : GKComponent
 
-@property (assign, nonatomic) NSUInteger healthPoints;
-@property (assign, nonatomic) NSUInteger defencePoints;
+@property (assign, nonatomic) NSInteger healthPoints;
+@property (assign, nonatomic) NSInteger defencePoints;
 
 -(instancetype)initWithHealth:(NSUInteger)hp andDefence:(NSUInteger)dp;
 

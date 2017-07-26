@@ -14,6 +14,7 @@
 {
   self = [super init];
   if (self) {
+    self.isDead = NO;
     self.size = CGSizeMake(50, 50);
     self.color = color;
     self.position = CGPointMake(0.0, 0.0);
@@ -33,6 +34,12 @@
     
     self.healthComponent = [[HealthComponent alloc] initWithHealth:100 andDefence:5];
     [self addComponent:self.healthComponent];
+    
+    self.barrierComponent = [[BarrierComponent alloc] initWithPlayer:self withColor:color Size:CGSizeMake(self.size.width*2, self.size.height*2)];
+    [self addComponent:self.barrierComponent];
+    
+//    self.barrier = [[Barrier alloc] initBarrierWithSize:CGSizeMake(self.size.width * 2, self.size.height * 2) andColor:self.color];
+//    [self.renderComponent.node addChild:self.barrier.renderComponent.node];
     
     self.agent = [[GKAgent2D alloc] init];
     self.agent.delegate = self;
@@ -57,12 +64,11 @@
 {
   if (self.healthComponent.healthPoints <= 0)
   {
+    self.isDead = YES;
     [self.renderComponent.node removeFromParent];
-    
   } else {
     CGPoint location = self.renderComponent.node.position;
     CGPoint newLocation = CGPointMake(location.x + (self.xVelocity * self.speed), location.y + (self.yVelocity * self.speed));
-    NSLog(@"%f %f", self.xVelocity, self.yVelocity);
     self.renderComponent.node.position = newLocation;
   }
   

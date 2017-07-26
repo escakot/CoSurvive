@@ -14,7 +14,8 @@
 @property (nonatomic) NSMutableArray<GKEntity *> *entities;
 @property (nonatomic) NSMutableDictionary<NSString*, GKGraph *> *graphs;
 
-@property (nonatomic, strong) GKComponentSystem *agentSystem;
+@property (nonatomic, readonly) GKComponentSystem *agentSystem;
 @property (nonatomic, readonly) GKComponentSystem *animationSystem;
+@property (nonatomic, readonly) GKComponentSystem *physicsSystem;
 
 @end

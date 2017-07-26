@@ -7,12 +7,15 @@
 //
 
 #import "Unit.h"
+#import "BarrierComponent.h"
 
 @interface Player : Unit
 
 @property (strong, nonatomic) AnimationComponent *animationComponent;
 @property (strong, nonatomic) HealthComponent *healthComponent;
 @property (strong, nonatomic) PhysicsComponent *physicsComponent;
+@property (strong, nonatomic) BarrierComponent *barrierComponent;
+@property (assign, nonatomic) BOOL isDead;
 
 - (instancetype)initWithScene:(SKScene*)scene andColor:(UIColor*)color;
 

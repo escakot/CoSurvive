@@ -9,10 +9,22 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM (uint32_t, PhysicsCategory) {
-  noCategory = 0,
-  playerCategory = 0b1,
-  enemyCategory = 0b1 << 1,
-  itemCategory = 0b1 << 2
+  noCategory =              0,
+  playerCategory =          0b1,
+  itemCategory =            0b1 << 1,
+  redEnemyCategory =        0b1 << 2,
+  redBarrierCategory =      0b1 << 3,
+  blueEnemyCategory =       0b1 << 4,
+  blueBarrierCategory =     0b1 << 5,
+  greenEnemyCategory =      0b1 << 6,
+  greenBarrierCategory =    0b1 << 7,
+  yellowEnemyCategory =     0b1 << 8,
+  yellowBarrierCategory =   0b1 << 9,
+  orangeEnemyCategory =     0b1 << 10,
+  orangeBarrierCategory =   0b1 << 11,
+  purpleEnemyCategory =     0b1 << 12,
+  purpleBarrierCategory =   0b1 << 13,
+  enemyCategory =           0b1 << 14
 };
 
 typedef struct
@@ -25,7 +37,18 @@ typedef struct
 @interface EntityPhysics : NSObject
 
 + (physicsBitMask) player;
-+ (physicsBitMask) enemy;
 + (physicsBitMask) item;
++ (physicsBitMask) redEnemy;
++ (physicsBitMask) redBarrier;
++ (physicsBitMask) blueEnemy;
++ (physicsBitMask) blueBarrier;
++ (physicsBitMask) greenEnemy;
++ (physicsBitMask) greenBarrier;
++ (physicsBitMask) yellowEnemy;
++ (physicsBitMask) yellowBarrier;
++ (physicsBitMask) orangeEnemy;
++ (physicsBitMask) orangeBarrier;
++ (physicsBitMask) purpleEnemy;
++ (physicsBitMask) purpleBarrier;
 
 @end

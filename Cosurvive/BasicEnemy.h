@@ -14,6 +14,6 @@
 @property (strong, nonatomic) HealthComponent *healthComponent;
 @property (strong, nonatomic) PhysicsComponent *physicsComponent;
 
-- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target andScene:(SKScene*)scene;
+- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target withPhysics:(physicsBitMask)bitMask;
 
 @end

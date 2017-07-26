@@ -11,7 +11,8 @@
 @interface AnimationComponent : GKComponent
 
 @property (strong, nonatomic) SKSpriteNode *sprite;
+@property (strong, nonatomic) SKSpriteNode *barrier;
 
--(instancetype)initWithSize:(CGSize)size andColor:(UIColor*)color;
+-(instancetype)initWithSize:(CGSize)size andColor:(UIColor *)color;
 
 @end
