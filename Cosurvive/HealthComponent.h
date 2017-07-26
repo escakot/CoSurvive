@@ -10,6 +10,7 @@
 
 @interface HealthComponent : GKComponent
 
+@property (assign, nonatomic) NSInteger maxHealthPoints;
 @property (assign, nonatomic) NSInteger healthPoints;
 @property (assign, nonatomic) NSInteger defencePoints;
 

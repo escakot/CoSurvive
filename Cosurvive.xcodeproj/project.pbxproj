@@ -26,7 +26,6 @@
 		D19CC1611F22CA4C00E97820 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D19CC15F1F22CA4C00E97820 /* LaunchScreen.storyboard */; };
 		D19CC1691F22CD3400E97820 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = D19CC1681F22CD3400E97820 /* MainMenu.sks */; };
 		D19CC16C1F22CDE500E97820 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = D19CC16B1F22CDE500E97820 /* MainMenu.m */; };
-		D1A697191F281674002420CE /* Barrier.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A697181F281674002420CE /* Barrier.m */; };
 		D1A697201F28BF46002420CE /* BlueState.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A6971F1F28BF46002420CE /* BlueState.m */; };
 		D1A697231F28BF5F002420CE /* RedState.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A697221F28BF5F002420CE /* RedState.m */; };
 		D1A697261F28BFD8002420CE /* BarrierComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A697251F28BFD8002420CE /* BarrierComponent.m */; };
@@ -71,8 +70,6 @@
 		D19CC1681F22CD3400E97820 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		D19CC16A1F22CDE500E97820 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
 		D19CC16B1F22CDE500E97820 /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
-		D1A697171F281674002420CE /* Barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Barrier.h; sourceTree = "<group>"; };
-		D1A697181F281674002420CE /* Barrier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Barrier.m; sourceTree = "<group>"; };
 		D1A6971E1F28BF46002420CE /* BlueState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlueState.h; sourceTree = "<group>"; };
 		D1A6971F1F28BF46002420CE /* BlueState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlueState.m; sourceTree = "<group>"; };
 		D1A697211F28BF5F002420CE /* RedState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedState.h; sourceTree = "<group>"; };
@@ -133,8 +130,6 @@
 				D16B75E81F22FAC90047A475 /* Player.m */,
 				D166908A1F26CCD500FE430A /* BasicEnemy.h */,
 				D10448F81F278EAF0057488D /* BasicEnemy.m */,
-				D1A697171F281674002420CE /* Barrier.h */,
-				D1A697181F281674002420CE /* Barrier.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -307,7 +302,6 @@
 				D19CC1591F22CA4C00E97820 /* GameViewController.m in Sources */,
 				D1FECA861F28001C00DE1B96 /* HealthComponent.m in Sources */,
 				D1318B341F2929190010A1C7 /* HealthBarNode.m in Sources */,
-				D1A697191F281674002420CE /* Barrier.m in Sources */,
 				D19CC14F1F22CA4C00E97820 /* AppDelegate.m in Sources */,
 				D1A697261F28BFD8002420CE /* BarrierComponent.m in Sources */,
 				D19CC1561F22CA4C00E97820 /* GameScene.m in Sources */,

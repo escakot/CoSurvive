@@ -38,8 +38,6 @@
     self.barrierComponent = [[BarrierComponent alloc] initWithPlayer:self withColor:color Size:CGSizeMake(self.size.width*2, self.size.height*2)];
     [self addComponent:self.barrierComponent];
     
-//    self.barrier = [[Barrier alloc] initBarrierWithSize:CGSizeMake(self.size.width * 2, self.size.height * 2) andColor:self.color];
-//    [self.renderComponent.node addChild:self.barrier.renderComponent.node];
     
     self.agent = [[GKAgent2D alloc] init];
     self.agent.delegate = self;

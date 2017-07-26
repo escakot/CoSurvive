@@ -13,6 +13,7 @@
 #import "HealthComponent.h"
 #import "EntityPhysics.h"
 #import "GameScene.h"
+#import "HealthBarNode.h"
 
 @interface Unit : GKEntity <GKAgentDelegate>
 
@@ -29,5 +30,7 @@
 
 @property (strong, nonatomic) RenderComponent *renderComponent;
 @property (strong, nonatomic) GKAgent2D *agent;
+
+@property (strong, nonatomic) HealthBarNode *healthBar;
 
 @end

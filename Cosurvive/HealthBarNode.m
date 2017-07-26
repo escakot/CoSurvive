@@ -27,8 +27,9 @@
 
 -(void)setHealthBar:(float)percentHealth
 {
-  self.redBar.size = CGSizeMake(percentHealth * self.size.width, self.size.height);
-  self.redBar.position = CGPointMake(self.greenBar.position.x - (percentHealth * self.size.width)/2, self.greenBar.position.y);
+//  self.greenBar.yScale = percentHealth;
+  self.greenBar.size = CGSizeMake(percentHealth * self.size.width, self.size.height);
+  self.greenBar.position = CGPointMake(self.redBar.frame.origin.x + self.greenBar.size.width/2, self.greenBar.position.y);
 }
 
 

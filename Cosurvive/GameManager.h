@@ -12,7 +12,6 @@
 
 #import "Player.h"
 #import "BasicEnemy.h"
-#import "Barrier.h"
 #import "GameScene.h"
 
 @interface GameManager : NSObject

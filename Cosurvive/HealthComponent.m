@@ -15,6 +15,7 @@
   self = [super init];
   if (self)
   {
+    _maxHealthPoints = hp;
     _healthPoints = hp;
     _defencePoints = dp;
   }

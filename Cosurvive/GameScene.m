@@ -105,8 +105,11 @@
   
   
   //Score and Health
+  self.score = 0;
+  self.scoreLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Score: %li", self.score]];
+  self.scoreLabel.fontColor = [UIColor whiteColor];
+  [self addChild:self.scoreLabel];
   self.healthBar = [[HealthBarNode alloc] initWithSize:CGSizeMake(100.0, 15)];
-  self.healthBar.position = CGPointMake(-100, self.size.height/2 - 20);
   [self addChild:self.healthBar];
 }
 
@@ -119,6 +122,7 @@
     BasicEnemy *enemyBody = (BasicEnemy*)contact.bodyA.node.entity;
     [self.basicEnemies removeObject:enemyBody];
     [self.agentSystem removeComponent:enemyBody.agent];
+    self.score++;
     if (contact.bodyB.categoryBitMask == playerCategory)
     {
       Player * playerBody = (Player*)contact.bodyB.node.entity;
@@ -138,6 +142,7 @@
     BasicEnemy *enemyBody = (BasicEnemy*)contact.bodyB.node.entity;
     [self.basicEnemies removeObject:enemyBody];
     [self.agentSystem removeComponent:enemyBody.agent];
+    self.score++;
   }
 }
 
@@ -198,36 +203,43 @@
   }
   
   _lastUpdateTime = currentTime;
-//  [self updateBackground];
+  [self updateBackground];
   [self.agentSystem updateWithDeltaTime:dt];
 }
 
 -(void)updateBackground
 {
   Player *player = self.players[0];
+  [self.healthBar setHealthBar:(float)player.healthComponent.healthPoints/(float)player.healthComponent.maxHealthPoints];
+  self.healthBar.position = CGPointMake(player.renderComponent.node.position.x - self.size.width/2 + self.healthBar.size.width/2 + 30, player.renderComponent.node.position.y + self.size.height/2 - 20);
+  self.scoreLabel.text = [NSString stringWithFormat:@"Score: %li", self.score];
+  self.scoreLabel.position = CGPointMake(player.renderComponent.node.position.x + self.size.width/2 - 100
+                                         ,player.renderComponent.node.position.y + self.size.height/2 - 50 );
+//  self.healthBar.yScale = player.healthComponent.healthPoints/player.healthComponent.maxHealthPoints;
 //  NSLog(@"%@", NSStringFromCGPoint(player.renderComponent.node.position));
 //  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture1.position));
 //  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture2.position));
-  if ((self.bgCount % 2) == 0)
-  {
-    if (self.bgTexture1.position.x < player.renderComponent.node.position.x - 100 ||
-        self.bgTexture1.position.x > player.renderComponent.node.position.x + 100 ||
-        self.bgTexture1.position.y < player.renderComponent.node.position.y - 100 ||
-        self.bgTexture1.position.y > player.renderComponent.node.position.y + 100)
-    {
-      self.bgTexture2.position = player.renderComponent.node.position;
-      self.bgCount++;
-    }
-  } else {
-    if (self.bgTexture2.position.x < player.renderComponent.node.position.x - 100 ||
-        self.bgTexture2.position.x > player.renderComponent.node.position.x + 100 ||
-        self.bgTexture2.position.y < player.renderComponent.node.position.y - 100 ||
-        self.bgTexture2.position.y > player.renderComponent.node.position.y + 100)
-    {
-      self.bgTexture1.position = player.renderComponent.node.position;
-      self.bgCount++;
-    }
-  }
+  
+//  if ((self.bgCount % 2) == 0)
+//  {
+//    if (self.bgTexture1.position.x < player.renderComponent.node.position.x - 100 ||
+//        self.bgTexture1.position.x > player.renderComponent.node.position.x + 100 ||
+//        self.bgTexture1.position.y < player.renderComponent.node.position.y - 100 ||
+//        self.bgTexture1.position.y > player.renderComponent.node.position.y + 100)
+//    {
+//      self.bgTexture2.position = player.renderComponent.node.position;
+//      self.bgCount++;
+//    }
+//  } else {
+//    if (self.bgTexture2.position.x < player.renderComponent.node.position.x - 100 ||
+//        self.bgTexture2.position.x > player.renderComponent.node.position.x + 100 ||
+//        self.bgTexture2.position.y < player.renderComponent.node.position.y - 100 ||
+//        self.bgTexture2.position.y > player.renderComponent.node.position.y + 100)
+//    {
+//      self.bgTexture1.position = player.renderComponent.node.position;
+//      self.bgCount++;
+//    }
+//  }
 }
 
 -(void)updateJoystick:(JoystickNode *)joystick xValue:(float)x yValue:(float)y
