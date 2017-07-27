@@ -10,6 +10,7 @@
 		D10448F91F278EAF0057488D /* BasicEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = D10448F81F278EAF0057488D /* BasicEnemy.m */; };
 		D10448FD1F27D9020057488D /* JoystickNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D10448FC1F27D9020057488D /* JoystickNode.m */; };
 		D1318B341F2929190010A1C7 /* HealthBarNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D1318B331F2929190010A1C7 /* HealthBarNode.m */; };
+		D15EE73D1F295DDB001CE398 /* GameOverNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D15EE73C1F295DDB001CE398 /* GameOverNode.m */; };
 		D16690901F26D1C000FE430A /* GameConfigurations.m in Sources */ = {isa = PBXBuildFile; fileRef = D166908F1F26D1C000FE430A /* GameConfigurations.m */; };
 		D16690931F26F0CB00FE430A /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D16690921F26F0CB00FE430A /* GameManager.m */; };
 		D16B75E91F22FAC90047A475 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B75E81F22FAC90047A475 /* Player.m */; };
@@ -29,6 +30,8 @@
 		D1A697201F28BF46002420CE /* BlueState.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A6971F1F28BF46002420CE /* BlueState.m */; };
 		D1A697231F28BF5F002420CE /* RedState.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A697221F28BF5F002420CE /* RedState.m */; };
 		D1A697261F28BFD8002420CE /* BarrierComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A697251F28BFD8002420CE /* BarrierComponent.m */; };
+		D1AD38CF1F29885100853613 /* ToughEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AD38CE1F29885100853613 /* ToughEnemy.m */; };
+		D1AD38D21F2A13EC00853613 /* ActionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AD38D11F2A13EC00853613 /* ActionNode.m */; };
 		D1CA648D1F26B2DF00C40FA7 /* RenderComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648C1F26B2DF00C40FA7 /* RenderComponent.m */; };
 		D1CA64901F26B59700C40FA7 /* PhysicsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */; };
 		D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */; };
@@ -42,6 +45,8 @@
 		D10448FC1F27D9020057488D /* JoystickNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JoystickNode.m; sourceTree = "<group>"; };
 		D1318B321F2929190010A1C7 /* HealthBarNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthBarNode.h; sourceTree = "<group>"; };
 		D1318B331F2929190010A1C7 /* HealthBarNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthBarNode.m; sourceTree = "<group>"; };
+		D15EE73B1F295DDB001CE398 /* GameOverNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverNode.h; sourceTree = "<group>"; };
+		D15EE73C1F295DDB001CE398 /* GameOverNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverNode.m; sourceTree = "<group>"; };
 		D166908A1F26CCD500FE430A /* BasicEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicEnemy.h; sourceTree = "<group>"; };
 		D166908E1F26D1C000FE430A /* GameConfigurations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfigurations.h; sourceTree = "<group>"; };
 		D166908F1F26D1C000FE430A /* GameConfigurations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConfigurations.m; sourceTree = "<group>"; };
@@ -76,6 +81,10 @@
 		D1A697221F28BF5F002420CE /* RedState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedState.m; sourceTree = "<group>"; };
 		D1A697241F28BFD8002420CE /* BarrierComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarrierComponent.h; sourceTree = "<group>"; };
 		D1A697251F28BFD8002420CE /* BarrierComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarrierComponent.m; sourceTree = "<group>"; };
+		D1AD38CD1F29885100853613 /* ToughEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToughEnemy.h; sourceTree = "<group>"; };
+		D1AD38CE1F29885100853613 /* ToughEnemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToughEnemy.m; sourceTree = "<group>"; };
+		D1AD38D01F2A13EC00853613 /* ActionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionNode.h; sourceTree = "<group>"; };
+		D1AD38D11F2A13EC00853613 /* ActionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionNode.m; sourceTree = "<group>"; };
 		D1CA648B1F26B2DF00C40FA7 /* RenderComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderComponent.h; sourceTree = "<group>"; };
 		D1CA648C1F26B2DF00C40FA7 /* RenderComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RenderComponent.m; sourceTree = "<group>"; };
 		D1CA648E1F26B59700C40FA7 /* PhysicsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsComponent.h; sourceTree = "<group>"; };
@@ -106,6 +115,10 @@
 				D10448FC1F27D9020057488D /* JoystickNode.m */,
 				D1318B321F2929190010A1C7 /* HealthBarNode.h */,
 				D1318B331F2929190010A1C7 /* HealthBarNode.m */,
+				D1AD38D01F2A13EC00853613 /* ActionNode.h */,
+				D1AD38D11F2A13EC00853613 /* ActionNode.m */,
+				D15EE73B1F295DDB001CE398 /* GameOverNode.h */,
+				D15EE73C1F295DDB001CE398 /* GameOverNode.m */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -130,6 +143,8 @@
 				D16B75E81F22FAC90047A475 /* Player.m */,
 				D166908A1F26CCD500FE430A /* BasicEnemy.h */,
 				D10448F81F278EAF0057488D /* BasicEnemy.m */,
+				D1AD38CD1F29885100853613 /* ToughEnemy.h */,
+				D1AD38CE1F29885100853613 /* ToughEnemy.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -179,8 +194,6 @@
 				D19CC16B1F22CDE500E97820 /* MainMenu.m */,
 				D19CC1541F22CA4C00E97820 /* GameScene.h */,
 				D19CC1551F22CA4C00E97820 /* GameScene.m */,
-				D19CC1571F22CA4C00E97820 /* GameViewController.h */,
-				D19CC1581F22CA4C00E97820 /* GameViewController.m */,
 				D16690911F26F0CB00FE430A /* GameManager.h */,
 				D16690921F26F0CB00FE430A /* GameManager.m */,
 				D19CC15A1F22CA4C00E97820 /* Main.storyboard */,
@@ -198,6 +211,8 @@
 		D19CC14A1F22CA4C00E97820 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D19CC1571F22CA4C00E97820 /* GameViewController.h */,
+				D19CC1581F22CA4C00E97820 /* GameViewController.m */,
 				D19CC1621F22CA4C00E97820 /* Info.plist */,
 				D19CC15F1F22CA4C00E97820 /* LaunchScreen.storyboard */,
 				D19CC14D1F22CA4C00E97820 /* AppDelegate.h */,
@@ -297,6 +312,7 @@
 				D19CC16C1F22CDE500E97820 /* MainMenu.m in Sources */,
 				D1CA64901F26B59700C40FA7 /* PhysicsComponent.m in Sources */,
 				D16B760A1F265B130047A475 /* AnimationComponent.m in Sources */,
+				D1AD38D21F2A13EC00853613 /* ActionNode.m in Sources */,
 				D1CA648D1F26B2DF00C40FA7 /* RenderComponent.m in Sources */,
 				D16B75EF1F22FC990047A475 /* Unit.m in Sources */,
 				D19CC1591F22CA4C00E97820 /* GameViewController.m in Sources */,
@@ -304,11 +320,13 @@
 				D1318B341F2929190010A1C7 /* HealthBarNode.m in Sources */,
 				D19CC14F1F22CA4C00E97820 /* AppDelegate.m in Sources */,
 				D1A697261F28BFD8002420CE /* BarrierComponent.m in Sources */,
+				D1AD38CF1F29885100853613 /* ToughEnemy.m in Sources */,
 				D19CC1561F22CA4C00E97820 /* GameScene.m in Sources */,
 				D16B75E91F22FAC90047A475 /* Player.m in Sources */,
 				D16690901F26D1C000FE430A /* GameConfigurations.m in Sources */,
 				D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */,
 				D1A697231F28BF5F002420CE /* RedState.m in Sources */,
+				D15EE73D1F295DDB001CE398 /* GameOverNode.m in Sources */,
 				D16690931F26F0CB00FE430A /* GameManager.m in Sources */,
 				D10448F91F278EAF0057488D /* BasicEnemy.m in Sources */,
 				D19CC14C1F22CA4C00E97820 /* main.m in Sources */,

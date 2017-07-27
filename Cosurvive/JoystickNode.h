@@ -28,7 +28,7 @@
 
 @property (assign, nonatomic) CGFloat touchPadLength;
 @property (assign, nonatomic) CGSize touchPadSize;
-@property (assign, nonatomic) SKTexture *touchPadTexture;
+@property (strong, nonatomic) SKTexture *touchPadTexture;
 
 @property (weak, nonatomic) id <JoystickDelegate> delegate;
 

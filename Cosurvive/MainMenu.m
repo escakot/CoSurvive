@@ -11,27 +11,36 @@
 
 @interface MainMenu ()
 
-@property (strong, nonatomic) SKSpriteNode *singlePlayerButton;
+@property (strong, nonatomic) SKLabelNode *startGameButton;
+@property (strong, nonatomic) SKLabelNode *settingsButton;
 
 @end
 
 @implementation MainMenu
 
 -(void)didMoveToView:(SKView *)view {
-    NSLog(@"Custom Class Running");
-    
-    self.singlePlayerButton = [[SKSpriteNode alloc] initWithColor:[UIColor whiteColor] size:CGSizeMake(150, 30)];
-    [self addChild:self.singlePlayerButton];
+  NSLog(@"Custom Class Running");
+  
+  SKSpriteNode *menuScreen = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"cosurvive-menu"] size:self.size];
+  [self addChild:menuScreen];
+  self.startGameButton = [SKLabelNode labelNodeWithText:@"New Game"];
+  self.startGameButton.fontSize = self.size.height/12;
+  self.startGameButton.position = CGPointMake(0, -self.size.height/2 + self.size.height/4);
+  [self addChild:self.startGameButton];
+  self.settingsButton = [SKLabelNode labelNodeWithText:@"Settings"];
+  self.settingsButton.fontSize = self.size.height/12;
+  self.settingsButton.position = CGPointMake(0, -self.size.height/2 + self.size.height/7);
+  [self addChild:self.settingsButton];
 }
 
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-//    NSSet *buttonTouches = [event touchesForView:self.singlePlayerButton];
-//    UITouch *buttonTouch = buttonTouches.anyObject;
+  //    NSSet *buttonTouches = [event touchesForView:self.singlePlayerButton];
+  //    UITouch *buttonTouch = buttonTouches.anyObject;
   for (UITouch * touch in touches) {
     CGPoint location = [touch locationInNode:self];
-    if ([self.singlePlayerButton containsPoint:location])
+    if ([self.startGameButton containsPoint:location])
     {
       GKScene *scene = [GKScene sceneWithFileNamed:@"GameScene"];
       
@@ -39,22 +48,22 @@
       GameScene *sceneNode = (GameScene *)scene.rootNode;
       
       // Copy gameplay related content over to the scene
-//      sceneNode.entities = [scene.entities mutableCopy];
-//      sceneNode.graphs = [scene.graphs mutableCopy];
+      sceneNode.entities = [scene.entities mutableCopy];
+      sceneNode.graphs = [scene.graphs mutableCopy];
       
       // Set the scale mode to scale to fit the window
-      sceneNode.scaleMode = SKSceneScaleModeAspectFill;
+      sceneNode.scaleMode = SKSceneScaleModeResizeFill;
       
       SKView *skView = (SKView *)self.view;
       
       // Present the scene
       [skView presentScene:sceneNode];
       
-//      skView.showsFPS = YES;
-//      skView.showsNodeCount = YES;
+      //      skView.showsFPS = YES;
+      //      skView.showsNodeCount = YES;
     }
   }
-    
+  
 }
 
 @end

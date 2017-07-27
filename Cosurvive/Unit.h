@@ -30,7 +30,9 @@
 
 @property (strong, nonatomic) RenderComponent *renderComponent;
 @property (strong, nonatomic) GKAgent2D *agent;
+@property (strong, nonatomic) GKAgent2D *target;
 
+@property (strong, nonatomic) GameScene *scene;
 @property (strong, nonatomic) HealthBarNode *healthBar;
 
 @end

@@ -12,29 +12,43 @@
 
 #import "JoystickNode.h"
 #import "HealthBarNode.h"
+#import "ActionNode.h"
+#import "GameOverNode.h"
 
 
-@interface GameScene () <SKPhysicsContactDelegate, JoystickDelegate>
+@interface GameScene () <SKPhysicsContactDelegate, JoystickDelegate, ActionButtonDelegate>
 
 @property (nonatomic, readwrite) GKComponentSystem *agentSystem;
 @property (nonatomic, readwrite) GKComponentSystem *animationSystem;
 
 @property (strong, nonatomic) NSMutableArray<Player*> *players;
 @property (strong, nonatomic) NSMutableDictionary* enemyUnits;
-@property (strong, nonatomic) NSMutableArray<BasicEnemy*>* basicEnemies;
+@property (strong, nonatomic) NSMutableArray<Unit*>* basicEnemies;
+@property (strong, nonatomic) NSMutableArray<Unit*>* toughEnemies;
 @property (strong, nonatomic) GameManager *gameManager;
-@property (strong, nonatomic) JoystickNode *joystick;
+
+//@property (strong, nonatomic) JoystickNode *joystick;
 @property (strong, nonatomic) SKSpriteNode *changeColorButton;
 @property (assign, nonatomic) BOOL joystickIsPressed;
 
 @property (strong, nonatomic) SKSpriteNode *bgTexture1;
 @property (strong, nonatomic) SKSpriteNode *bgTexture2;
+@property (strong, nonatomic) SKSpriteNode *bgTexture3;
+@property (strong, nonatomic) SKSpriteNode *bgTexture4;
+@property (strong, nonatomic) SKSpriteNode *bgTexture5;
+@property (strong, nonatomic) SKSpriteNode *bgTexture6;
+@property (strong, nonatomic) SKSpriteNode *bgTexture7;
+@property (strong, nonatomic) SKSpriteNode *bgTexture8;
+@property (strong, nonatomic) SKSpriteNode *bgTexture9;
 @property (assign, nonatomic) NSInteger bgCount;
 
 @property (strong, nonatomic) SKLabelNode *scoreLabel;
 @property (strong, nonatomic) SKLabelNode *healthLabel;
 @property (strong, nonatomic) HealthBarNode *healthBar;
+@property (assign, nonatomic) BOOL playGame;
+
 @property (assign, nonatomic) NSUInteger score;
+@property (strong, nonatomic) NSNumber* highscore;
 
 @end
 
@@ -54,20 +68,22 @@
 -(void)didMoveToView:(SKView *)view
 {
   //Setup Background Texture
-//  self.bgTexture1 = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:@"grass"]];
-//  self.bgTexture1.size = CGSizeMake(self.frame.size.width * 1.5, self.frame.size.height * 1.5);
-//  self.bgTexture1.position = self.position;
-//  [self addChild:self.bgTexture1];
-//  self.bgTexture2 = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:@"grass"]];
-//  self.bgTexture2.size = self.bgTexture1.size;
-//  [self addChild:self.bgTexture2];
-//  self.bgCount = 0;
+//  [self setupBackground];
   
   //Game Configurations
+  self.playGame = YES;
   self.players = [[NSMutableArray alloc] init];
   self.basicEnemies = [[NSMutableArray alloc] init];
+  self.toughEnemies = [[NSMutableArray alloc] init];
   self.enemyUnits = [[NSMutableDictionary alloc] init];
   [self.enemyUnits setObject:self.basicEnemies forKey:@"basicEnemies"];
+  [self.enemyUnits setObject:self.toughEnemies forKey:@"toughEnemies"];
+  
+  //GameManager Settings
+  [GameManager sharedManager].scene = self;
+  [GameManager sharedManager].isBasicEnabled = YES;
+  [GameManager sharedManager].isToughEnabled = YES;
+  [GameManager sharedManager].toughUnitLimit = 50;
   
   //Setup Component Systems
   self.agentSystem = [[GKComponentSystem alloc] initWithComponentClass:[GKAgent2D class]];
@@ -109,8 +125,11 @@
   self.scoreLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Score: %li", self.score]];
   self.scoreLabel.fontColor = [UIColor whiteColor];
   [self addChild:self.scoreLabel];
-  self.healthBar = [[HealthBarNode alloc] initWithSize:CGSizeMake(100.0, 15)];
+  self.healthBar = [[HealthBarNode alloc] initWithSize:CGSizeMake(100.0, 10)];
   [self addChild:self.healthBar];
+  
+  //Load score
+  [self highScoreToUserDefaults];
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
@@ -119,8 +138,9 @@
   if (contact.bodyA.categoryBitMask == enemyCategory)
   {
     [contact.bodyA.node removeFromParent];
-    BasicEnemy *enemyBody = (BasicEnemy*)contact.bodyA.node.entity;
+    Unit *enemyBody = (Unit*)contact.bodyA.node.entity;
     [self.basicEnemies removeObject:enemyBody];
+    [self.toughEnemies removeObject:enemyBody];
     [self.agentSystem removeComponent:enemyBody.agent];
     self.score++;
     if (contact.bodyB.categoryBitMask == playerCategory)
@@ -133,14 +153,16 @@
     Player * playerBody = (Player*)contact.bodyA.node.entity;
     playerBody.healthComponent.healthPoints -= 10;
     [contact.bodyB.node removeFromParent];
-    BasicEnemy *enemyBody = (BasicEnemy*)contact.bodyB.node.entity;
+    Unit *enemyBody = (Unit*)contact.bodyB.node.entity;
     [self.basicEnemies removeObject:enemyBody];
+    [self.toughEnemies removeObject:enemyBody];
     [self.agentSystem removeComponent:enemyBody.agent];
     
   } else {
     [contact.bodyB.node removeFromParent];
-    BasicEnemy *enemyBody = (BasicEnemy*)contact.bodyB.node.entity;
+    Unit *enemyBody = (Unit*)contact.bodyB.node.entity;
     [self.basicEnemies removeObject:enemyBody];
+    [self.toughEnemies removeObject:enemyBody];
     [self.agentSystem removeComponent:enemyBody.agent];
     self.score++;
   }
@@ -196,13 +218,17 @@
   CGFloat dt = currentTime - _lastUpdateTime;
   
   [[GameManager sharedManager] spawnUnitsInScene:self players:self.players units:self.enemyUnits time:dt];
-//  NSLog(@"%f", self.size.width);
+//  NSLog(@"%li", self.basicEnemies.count);
+//  NSLog(@"%li", self.toughEnemies.count);
+//  NSLog(@"%li", self.agentSystem.components.count);
+  
   // Update entities
   for (GKEntity *entity in self.entities) {
     [entity updateWithDeltaTime:dt];
   }
   
   _lastUpdateTime = currentTime;
+  [self checkGameOver];
   [self updateBackground];
   [self.agentSystem updateWithDeltaTime:dt];
 }
@@ -215,7 +241,6 @@
   self.scoreLabel.text = [NSString stringWithFormat:@"Score: %li", self.score];
   self.scoreLabel.position = CGPointMake(player.renderComponent.node.position.x + self.size.width/2 - 100
                                          ,player.renderComponent.node.position.y + self.size.height/2 - 50 );
-//  self.healthBar.yScale = player.healthComponent.healthPoints/player.healthComponent.maxHealthPoints;
 //  NSLog(@"%@", NSStringFromCGPoint(player.renderComponent.node.position));
 //  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture1.position));
 //  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture2.position));
@@ -252,6 +277,66 @@
 - (void)isPressed:(JoystickNode *)joystick isPressed:(BOOL)pressed
 {
   self.joystickIsPressed = pressed;
+}
+
+- (void)checkGameOver
+{
+  Player *player = self.players[0];
+  if (player.isDead)
+  {
+    if (self.playGame)
+    {
+      [self highScoreToUserDefaults];
+      self.playGame = NO;
+      GameOverNode *gameOverScreen = [[GameOverNode alloc] initWithScene:self withScore:[self.highscore integerValue]];
+      gameOverScreen.position = player.renderComponent.node.position;
+      gameOverScreen.zPosition = 10;
+      [self addChild:gameOverScreen];
+    }
+  }
+}
+
+-(void)highScoreToUserDefaults
+{
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  self.highscore = [userDefaults valueForKey:@"highscore"];
+  self.highscore = self.score > [self.highscore integerValue] ? [NSNumber numberWithInteger:self.score] : self.highscore;
+  [userDefaults setValue:self.highscore forKey:@"highscore"];
+  [userDefaults synchronize];
+}
+
+- (void)setupBackground
+{
+  SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"grass"];
+  self.bgTexture1 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+  self.bgTexture2 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+  self.bgTexture3 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+  self.bgTexture4 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+  self.bgTexture5 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+  self.bgTexture6 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+  self.bgTexture7 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+  self.bgTexture8 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+  self.bgTexture9 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
+  self.bgTexture1.position = CGPointMake(-self.bgTexture1.size.width, self.bgTexture1.size.height);
+  self.bgTexture2.position = CGPointMake(0, self.bgTexture1.size.height);
+  self.bgTexture3.position = CGPointMake(self.bgTexture1.size.width, self.bgTexture1.size.height);
+  self.bgTexture4.position = CGPointMake(-self.bgTexture1.size.width, 0);
+  self.bgTexture5.position = CGPointMake(0, 0);
+  self.bgTexture6.position = CGPointMake(self.bgTexture1.size.width, 0);
+  self.bgTexture7.position = CGPointMake(-self.bgTexture1.size.width, -self.bgTexture1.size.height);
+  self.bgTexture8.position = CGPointMake(0, -self.bgTexture1.size.height);
+  self.bgTexture9.position = CGPointMake(self.bgTexture1.size.width, -self.bgTexture1.size.height);
+//  NSLog(@"%@", NSStringFromCGSize(self.bgTexture1.size));
+  [self addChild:self.bgTexture1];
+  [self addChild:self.bgTexture2];
+  [self addChild:self.bgTexture3];
+  [self addChild:self.bgTexture4];
+  [self addChild:self.bgTexture5];
+  [self addChild:self.bgTexture6];
+  [self addChild:self.bgTexture7];
+  [self addChild:self.bgTexture8];
+  [self addChild:self.bgTexture9];
+  
 }
 
 @end
