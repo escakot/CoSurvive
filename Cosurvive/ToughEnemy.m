@@ -34,8 +34,8 @@
     
     self.renderComponent.node.physicsBody = physicsComponent.physicsBody;
     
-    AnimationComponent *animationComponent = [[AnimationComponent alloc] initWithSize:self.size andColor:self.color];
-    [self.renderComponent.node addChild:animationComponent.sprite];
+    AnimationComponent *animationComponent = [[AnimationComponent alloc] initWithSize:self.size andColor:self.color withShape:0];
+    [self.renderComponent.node addChild:animationComponent.shape];
     
     //GKAgent2D
     self.agent = [[GKAgent2D alloc] init];

@@ -26,10 +26,10 @@
   
   Player* player = (Player*)self.barrierComponent.entity;
   player.barrierComponent.color = [UIColor orangeColor];
-  player.animationComponent.sprite.color = player.barrierComponent.color;
-  player.barrierComponent.sprite.color = player.barrierComponent.color;
-  player.barrierComponent.sprite.physicsBody.categoryBitMask = orangeBarrierCategory;
-  player.barrierComponent.sprite.physicsBody.contactTestBitMask = orangeEnemyCategory;
+  player.animationComponent.shape.fillColor = player.barrierComponent.color;
+  player.barrierComponent.shape.fillColor = player.barrierComponent.color;
+  player.barrierComponent.shape.physicsBody.categoryBitMask = orangeBarrierCategory;
+  player.barrierComponent.shape.physicsBody.contactTestBitMask = orangeEnemyCategory;
   
 }
 

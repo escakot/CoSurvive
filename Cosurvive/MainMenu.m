@@ -19,7 +19,6 @@
 @implementation MainMenu
 
 -(void)didMoveToView:(SKView *)view {
-  NSLog(@"Custom Class Running");
   
   SKSpriteNode *menuScreen = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"cosurvive-menu"] size:self.size];
   [self addChild:menuScreen];
@@ -62,16 +61,12 @@
       //      skView.showsFPS = YES;
       //      skView.showsNodeCount = YES;
     }
-    if ([self.startGameButton containsPoint:location])
+    if ([self.settingsButton containsPoint:location])
     {
-      GKScene *scene = [GKScene sceneWithFileNamed:@"GameScene"];
+      GKScene *scene = [GKScene sceneWithFileNamed:@"Settings"];
       
       // Get the SKScene from the loaded GKScene
       GameScene *sceneNode = (GameScene *)scene.rootNode;
-      
-      // Copy gameplay related content over to the scene
-      sceneNode.entities = [scene.entities mutableCopy];
-      sceneNode.graphs = [scene.graphs mutableCopy];
       
       // Set the scale mode to scale to fit the window
       sceneNode.scaleMode = SKSceneScaleModeResizeFill;
@@ -80,9 +75,6 @@
       
       // Present the scene
       [skView presentScene:sceneNode];
-      
-      //      skView.showsFPS = YES;
-      //      skView.showsNodeCount = YES;
     }
   }
   

@@ -21,6 +21,7 @@
 
 @property (strong, nonatomic) NSArray *numberOfGameColors;
 @property (assign, nonatomic) NSInteger chosenColors;
+@property (assign, nonatomic) NSInteger difficulty;
 
 @property (assign, nonatomic) BOOL isBasicEnabled;
 @property (assign, nonatomic) BOOL isToughEnabled;

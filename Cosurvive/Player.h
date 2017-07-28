@@ -17,6 +17,6 @@
 @property (strong, nonatomic) BarrierComponent *barrierComponent;
 @property (assign, nonatomic) BOOL isDead;
 
-- (instancetype)initWithScene:(SKScene*)scene andColor:(UIColor*)color;
+- (instancetype)initWithScene:(SKScene*)scene andColor:(UIColor*)color withShape:(NSInteger)shape;
 
 @end

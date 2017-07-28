@@ -10,7 +10,7 @@
 
 @implementation Player
 
-- (instancetype)initWithScene:(SKScene*)scene andColor:(UIColor*)color
+- (instancetype)initWithScene:(SKScene*)scene andColor:(UIColor*)color withShape:(NSInteger)shape
 {
   self = [super init];
   if (self) {
@@ -18,7 +18,7 @@
     self.size = CGSizeMake(50, 50);
     self.color = color;
     self.position = CGPointMake(0.0, 0.0);
-    self.speed = 5.0;
+    self.speed = 4.0;
     
     self.renderComponent = [[RenderComponent alloc] init];
     [self addComponent:self.renderComponent];
@@ -29,13 +29,13 @@
     
     self.renderComponent.node.physicsBody = self.physicsComponent.physicsBody;
     
-    self.animationComponent = [[AnimationComponent alloc] initWithSize:self.size andColor:self.color];
-    [self.renderComponent.node addChild:self.animationComponent.sprite];
+    self.animationComponent = [[AnimationComponent alloc] initWithSize:self.size andColor:self.color withShape:shape];
+    [self.renderComponent.node addChild:self.animationComponent.shape];
     
     self.healthComponent = [[HealthComponent alloc] initWithHealth:100 andDefence:5];
     [self addComponent:self.healthComponent];
     
-    self.barrierComponent = [[BarrierComponent alloc] initWithPlayer:self withColor:color Size:CGSizeMake(self.size.width*2, self.size.height*2)];
+    self.barrierComponent = [[BarrierComponent alloc] initWithPlayer:self withColor:color Size:CGSizeMake(self.size.width*2, self.size.height*2) withShape:shape];
     [self addComponent:self.barrierComponent];
     
     
@@ -60,13 +60,14 @@
 
 -(void)updateWithDeltaTime:(NSTimeInterval)seconds
 {
+  float speed = self.speed * seconds * 60;
   if (self.healthComponent.healthPoints <= 0)
   {
     self.isDead = YES;
     [self.renderComponent.node removeFromParent];
   } else {
     CGPoint location = self.renderComponent.node.position;
-    CGPoint newLocation = CGPointMake(location.x + (self.xVelocity * self.speed), location.y + (self.yVelocity * self.speed));
+    CGPoint newLocation = CGPointMake(location.x + (self.xVelocity * speed), location.y + (self.yVelocity * speed));
     self.renderComponent.node.position = newLocation;
   }
   

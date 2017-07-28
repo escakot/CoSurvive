@@ -11,7 +11,7 @@
 
 @implementation BarrierComponent
 
-- (instancetype)initWithPlayer:(Player*)player withColor:(UIColor*)color Size:(CGSize)size
+- (instancetype)initWithPlayer:(Player*)player withColor:(UIColor*)color Size:(CGSize)size withShape:(NSInteger)shape
 {
   self = [super init];
   if (self)
@@ -19,13 +19,22 @@
     _size = size;
     _color = color;
     _player = player;
-    _sprite = [[SKSpriteNode alloc] initWithColor:color size:size];
-    _sprite.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:size];
-    _sprite.physicsBody.categoryBitMask = redBarrierCategory;
-    _sprite.physicsBody.collisionBitMask = 0;
-    _sprite.physicsBody.contactTestBitMask = redEnemyCategory;
-    _sprite.alpha = 0.4;
-    [player.renderComponent.node addChild:_sprite];
+    if (shape == 0)
+    {
+      _shape = [SKShapeNode shapeNodeWithRectOfSize:size];
+    } else
+    {
+      _shape = [SKShapeNode shapeNodeWithCircleOfRadius:size.width/2];
+      
+    }
+    _shape.fillColor = color;
+    _shape.strokeColor = [UIColor clearColor];
+    _shape.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:size];
+    _shape.physicsBody.categoryBitMask = redBarrierCategory;
+    _shape.physicsBody.collisionBitMask = 0;
+    _shape.physicsBody.contactTestBitMask = redEnemyCategory;
+    _shape.alpha = 0.4;
+    [player.renderComponent.node addChild:_shape];
     _stateMachine = [[GKStateMachine alloc] initWithStates:
                      @[[[RedState alloc] initWithComponent:self],
                        [[BlueState alloc] initWithComponent:self],

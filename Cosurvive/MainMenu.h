@@ -11,7 +11,4 @@
 
 @interface MainMenu : SKScene
 
-@property (nonatomic) NSMutableArray<GKEntity *> *entities;
-@property (nonatomic) NSMutableDictionary<NSString*, GKGraph *> *graphs;
-
 @end

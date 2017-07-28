@@ -10,9 +10,8 @@
 
 @interface AnimationComponent : GKComponent
 
-@property (strong, nonatomic) SKSpriteNode *sprite;
-@property (strong, nonatomic) SKSpriteNode *barrier;
+@property (strong, nonatomic) SKShapeNode *shape;
 
--(instancetype)initWithSize:(CGSize)size andColor:(UIColor *)color;
+-(instancetype)initWithSize:(CGSize)size andColor:(UIColor *)color withShape:(NSInteger)shape;
 
 @end

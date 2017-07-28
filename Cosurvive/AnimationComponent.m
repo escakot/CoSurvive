@@ -11,12 +11,18 @@
 
 @implementation AnimationComponent
 
--(instancetype)initWithSize:(CGSize)size andColor:(UIColor *)color
+-(instancetype)initWithSize:(CGSize)size andColor:(UIColor *)color withShape:(NSInteger)shape
 {
   self = [super init];
   if (self)
   {
-    _sprite = [[SKSpriteNode alloc] initWithColor:color size:size];
+    if (shape == 0)
+    {
+      _shape = [SKShapeNode shapeNodeWithRectOfSize:size];
+    } else {
+      _shape = [SKShapeNode shapeNodeWithCircleOfRadius:size.width/2];
+    }
+    _shape.fillColor = color;
   }
   return self;
 }

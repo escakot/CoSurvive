@@ -21,10 +21,6 @@
 @property (nonatomic, readwrite) GKComponentSystem *agentSystem;
 @property (nonatomic, readwrite) GKComponentSystem *animationSystem;
 
-@property (strong, nonatomic) NSArray<UIColor*>* numberOfGameColors;
-@property (strong, nonatomic) NSArray<GKState*>* numberOfBarrierStates;
-@property (assign, nonatomic) NSUInteger chosenColors;
-
 @property (strong, nonatomic) NSMutableArray<Player*> *players;
 @property (strong, nonatomic) NSMutableDictionary* enemyUnits;
 @property (strong, nonatomic) NSMutableArray<Unit*>* basicEnemies;
@@ -36,24 +32,26 @@
 @property (strong, nonatomic) SKSpriteNode *changeColorButton;
 @property (assign, nonatomic) BOOL joystickIsPressed;
 
-@property (strong, nonatomic) SKSpriteNode *bgTexture1;
-@property (strong, nonatomic) SKSpriteNode *bgTexture2;
-@property (strong, nonatomic) SKSpriteNode *bgTexture3;
-@property (strong, nonatomic) SKSpriteNode *bgTexture4;
-@property (strong, nonatomic) SKSpriteNode *bgTexture5;
-@property (strong, nonatomic) SKSpriteNode *bgTexture6;
-@property (strong, nonatomic) SKSpriteNode *bgTexture7;
-@property (strong, nonatomic) SKSpriteNode *bgTexture8;
-@property (strong, nonatomic) SKSpriteNode *bgTexture9;
-@property (assign, nonatomic) NSInteger bgCount;
+@property (strong, nonatomic) NSDictionary<NSString*, NSNumber*>* backgrounds;
+@property (strong, nonatomic) NSMutableArray<NSMutableArray*>* backgroundTilesArray;
+@property (strong, nonatomic) NSString* chosenBackground;
+@property (assign, nonatomic) NSInteger xMovement;
+@property (assign, nonatomic) NSInteger yMovement;
 
 @property (strong, nonatomic) SKLabelNode *scoreLabel;
 @property (strong, nonatomic) SKLabelNode *healthLabel;
 @property (strong, nonatomic) HealthBarNode *healthBar;
 @property (assign, nonatomic) BOOL playGame;
 
+//NSUserDefaults
 @property (assign, nonatomic) NSUInteger score;
 @property (strong, nonatomic) NSNumber* highscore;
+@property (strong, nonatomic) NSArray<UIColor*>* numberOfGameColors;
+@property (strong, nonatomic) NSArray<GKState*>* numberOfBarrierStates;
+@property (assign, nonatomic) NSInteger playerShape;
+@property (assign, nonatomic) NSInteger chosenColors;
+
+
 
 @end
 
@@ -73,7 +71,12 @@
 -(void)didMoveToView:(SKView *)view
 {
   //Setup Background Texture
-  //  [self setupBackground];
+  self.backgrounds = @{@"grass" : @20};
+  self.chosenBackground = @"grass";
+  self.xMovement = 0;
+  self.yMovement = 0;
+  
+  [self setupBackground];
   
   //Game Configurations
   self.playGame = YES;
@@ -91,10 +94,10 @@
   
   
   //GameManager Settings
+  [self loadUserDefaultsIntoGameManager];
   [GameManager sharedManager].scene = self;
   [GameManager sharedManager].isBasicEnabled = YES;
   [GameManager sharedManager].isToughEnabled = YES;
-  [GameManager sharedManager].toughUnitLimit = 50;
   [GameManager sharedManager].chosenColors = self.chosenColors;
   
   //Setup Component Systems
@@ -104,7 +107,7 @@
   self.physicsWorld.contactDelegate = self;
   
   //Players
-  Player* player = [[Player alloc] initWithScene:self andColor:[UIColor redColor]];
+  Player* player = [[Player alloc] initWithScene:self andColor:[UIColor redColor] withShape:self.playerShape];
   [self.players addObject:player];
   
   
@@ -129,9 +132,9 @@
   [player.renderComponent.node addChild:self.joystick];
   
   
-  self.colorButton = [[ActionNode alloc] initWithSize:15.0 withIdentifier:@"color"];
+  self.colorButton = [[ActionNode alloc] initWithSize:20.0 withIdentifier:@"color"];
   self.colorButton.delegate = self;
-  self.colorButton.position = CGPointMake(self.size.width/2 - 60, -self.size.height/2 + 60);
+  self.colorButton.position = CGPointMake(self.size.width/2 - 75, -self.size.height/2 + 75);
   self.colorButton.zPosition = 100.0;
   [player.renderComponent.node addChild:self.colorButton];
   //  self.changeColorButton = [[SKSpriteNode alloc] initWithColor:[UIColor blueColor] size:CGSizeMake(30, 30)];
@@ -148,7 +151,7 @@
   [self addChild:self.healthBar];
   
   //Load score
-  [self highScoreToUserDefaults];
+  [self saveHighScoreToUserDefaults];
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
@@ -244,30 +247,48 @@
   self.scoreLabel.text = [NSString stringWithFormat:@"Score: %li", self.score];
   self.scoreLabel.position = CGPointMake(player.renderComponent.node.position.x + self.size.width/2 - 100
                                          ,player.renderComponent.node.position.y + self.size.height/2 - 50 );
-  //  NSLog(@"%@", NSStringFromCGPoint(player.renderComponent.node.position));
-  //  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture1.position));
-  //  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture2.position));
   
-  //  if ((self.bgCount % 2) == 0)
-  //  {
-  //    if (self.bgTexture1.position.x < player.renderComponent.node.position.x - 100 ||
-  //        self.bgTexture1.position.x > player.renderComponent.node.position.x + 100 ||
-  //        self.bgTexture1.position.y < player.renderComponent.node.position.y - 100 ||
-  //        self.bgTexture1.position.y > player.renderComponent.node.position.y + 100)
-  //    {
-  //      self.bgTexture2.position = player.renderComponent.node.position;
-  //      self.bgCount++;
-  //    }
-  //  } else {
-  //    if (self.bgTexture2.position.x < player.renderComponent.node.position.x - 100 ||
-  //        self.bgTexture2.position.x > player.renderComponent.node.position.x + 100 ||
-  //        self.bgTexture2.position.y < player.renderComponent.node.position.y - 100 ||
-  //        self.bgTexture2.position.y > player.renderComponent.node.position.y + 100)
-  //    {
-  //      self.bgTexture1.position = player.renderComponent.node.position;
-  //      self.bgCount++;
-  //    }
-  //  }
+  if (player.renderComponent.node.position.x/25 > self.xMovement)
+  {
+    self.xMovement++;
+    for (NSMutableArray* xTileArray in self.backgroundTilesArray) {
+      SKSpriteNode *tile = xTileArray.firstObject;
+      tile.position = CGPointMake(tile.position.x + (xTileArray.count) * 25, tile.position.y);
+      [xTileArray removeObject:xTileArray.firstObject];
+      [xTileArray addObject:tile];
+    }
+  }
+  if(player.renderComponent.node.position.x/25 < self.xMovement)
+  {
+    self.xMovement--;
+    for (NSMutableArray* xTileArray in self.backgroundTilesArray) {
+      SKSpriteNode *tile = xTileArray.lastObject;
+      tile.position = CGPointMake(tile.position.x - (xTileArray.count) * 25, tile.position.y);
+      [xTileArray removeLastObject];
+      [xTileArray insertObject:tile atIndex:0];
+    }
+  }
+  if (player.renderComponent.node.position.y/25 > self.yMovement)
+  {
+    self.yMovement++;
+    for (SKSpriteNode* tile in self.backgroundTilesArray.lastObject) {
+      tile.position = CGPointMake(tile.position.x, tile.position.y + (self.backgroundTilesArray.count * 25));
+    }
+    NSMutableArray* tileRow = self.backgroundTilesArray.lastObject;
+    [self.backgroundTilesArray removeLastObject];
+    [self.backgroundTilesArray insertObject:tileRow atIndex:0];
+  }
+  if (player.renderComponent.node.position.y/25 < self.yMovement)
+  {
+    self.yMovement--;
+    for (SKSpriteNode* tile in self.backgroundTilesArray.firstObject) {
+      tile.position = CGPointMake(tile.position.x, tile.position.y - (self.backgroundTilesArray.count * 25));
+    }
+    NSMutableArray* tileRow = self.backgroundTilesArray.firstObject;
+    [self.backgroundTilesArray removeObjectAtIndex:0];
+    [self.backgroundTilesArray addObject:tileRow];
+  }
+  
 }
 
 -(void)updateJoystick:(JoystickNode *)joystick xValue:(float)x yValue:(float)y
@@ -289,7 +310,7 @@
   {
     if (self.playGame)
     {
-      [self highScoreToUserDefaults];
+      [self saveHighScoreToUserDefaults];
       self.playGame = NO;
       GameOverNode *gameOverScreen = [[GameOverNode alloc] initWithScene:self withScore:[self.highscore integerValue]];
       gameOverScreen.position = player.renderComponent.node.position;
@@ -299,46 +320,50 @@
   }
 }
 
--(void)highScoreToUserDefaults
+-(void)saveHighScoreToUserDefaults
 {
   NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  self.highscore = [userDefaults valueForKey:@"highscore"];
   self.highscore = self.score > [self.highscore integerValue] ? [NSNumber numberWithInteger:self.score] : self.highscore;
   [userDefaults setValue:self.highscore forKey:@"highscore"];
   [userDefaults synchronize];
 }
 
+-(void)loadUserDefaultsIntoGameManager
+{
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  [GameManager sharedManager].difficulty = [(NSNumber*)[userDefaults objectForKey:@"difficulty"] integerValue];
+  self.chosenColors = [(NSNumber*)[userDefaults objectForKey:@"numberOfColors"] integerValue];
+  self.chosenColors  = self.chosenColors < 2 ? 2 : self.chosenColors;
+  self.playerShape = [(NSNumber*)[userDefaults objectForKey:@"playerShape"] integerValue];
+  self.highscore = [userDefaults valueForKey:@"highscore"];
+}
+
 - (void)setupBackground
 {
-  SKTexture *backgroundTexture = [SKTexture textureWithImageNamed:@"grass"];
-  self.bgTexture1 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
-  self.bgTexture2 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
-  self.bgTexture3 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
-  self.bgTexture4 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
-  self.bgTexture5 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
-  self.bgTexture6 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
-  self.bgTexture7 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
-  self.bgTexture8 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
-  self.bgTexture9 = [[SKSpriteNode alloc] initWithTexture:backgroundTexture];
-  self.bgTexture1.position = CGPointMake(-self.bgTexture1.size.width, self.bgTexture1.size.height);
-  self.bgTexture2.position = CGPointMake(0, self.bgTexture1.size.height);
-  self.bgTexture3.position = CGPointMake(self.bgTexture1.size.width, self.bgTexture1.size.height);
-  self.bgTexture4.position = CGPointMake(-self.bgTexture1.size.width, 0);
-  self.bgTexture5.position = CGPointMake(0, 0);
-  self.bgTexture6.position = CGPointMake(self.bgTexture1.size.width, 0);
-  self.bgTexture7.position = CGPointMake(-self.bgTexture1.size.width, -self.bgTexture1.size.height);
-  self.bgTexture8.position = CGPointMake(0, -self.bgTexture1.size.height);
-  self.bgTexture9.position = CGPointMake(self.bgTexture1.size.width, -self.bgTexture1.size.height);
-  //  NSLog(@"%@", NSStringFromCGSize(self.bgTexture1.size));
-  [self addChild:self.bgTexture1];
-  [self addChild:self.bgTexture2];
-  [self addChild:self.bgTexture3];
-  [self addChild:self.bgTexture4];
-  [self addChild:self.bgTexture5];
-  [self addChild:self.bgTexture6];
-  [self addChild:self.bgTexture7];
-  [self addChild:self.bgTexture8];
-  [self addChild:self.bgTexture9];
+//  NSInteger xTiles = ceil(self.size.width/512) + 2;
+//  NSInteger yTiles = ceil(self.size.height/512) + 2;
+//  CGFloat middleX = xTiles * 512 / 2 - 256;
+//  CGFloat middleY = yTiles * 512 / 2 - 256;
+  NSInteger xTiles = ceil(self.size.width/25) + 1;
+  NSInteger yTiles = ceil(self.size.height/25) + 1;
+  CGFloat middleX = xTiles * 25 / 2 - 25;
+  CGFloat middleY = yTiles * 25 / 2 ;
+  NSInteger randomTile = [[GKARC4RandomSource sharedRandom] nextIntWithUpperBound:(self.backgrounds[self.chosenBackground].integerValue)];
+  
+  self.backgroundTilesArray = [[NSMutableArray alloc] init];
+  for (int i = 0; i < yTiles; i++)
+  {
+    NSMutableArray *yTileArray = [[NSMutableArray alloc] init];
+    for (int j = 0; j < xTiles; j++)
+    {
+      SKSpriteNode *tile = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@%lu", self.chosenBackground, randomTile]]];
+//      SKSpriteNode *tile = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:@"galaxy"]];
+      tile.position = CGPointMake(j * 25 - middleX, middleY - i * 25);
+      [yTileArray addObject:tile];
+      [self addChild:tile];
+    }
+    [self.backgroundTilesArray addObject:yTileArray];
+  }
 }
 
 -(void)performAction:(NSString *)identifier
@@ -346,12 +371,10 @@
   if ([identifier isEqualToString:@"color"])
   {
     Player *player = self.players[0];
-    player.animationComponent.sprite.color = self.colorButton.button.fillColor;
-    player.barrierComponent.sprite.color = self.colorButton.button.fillColor;
     NSUInteger currentColorIndex = [self.numberOfGameColors indexOfObject:self.colorButton.button.fillColor];
     NSUInteger nextColorIndex = (currentColorIndex + 1) % self.numberOfGameColors.count;
     self.colorButton.button.fillColor = self.numberOfGameColors[nextColorIndex];
-    [player.barrierComponent.stateMachine enterState:[self.numberOfBarrierStates[nextColorIndex] class]];
+    [player.barrierComponent.stateMachine enterState:[self.numberOfBarrierStates[currentColorIndex] class]];
   }
 }
 
