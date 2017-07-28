@@ -25,6 +25,7 @@
 @property (strong, nonatomic) NSMutableDictionary* enemyUnits;
 @property (strong, nonatomic) NSMutableArray<Unit*>* basicEnemies;
 @property (strong, nonatomic) NSMutableArray<Unit*>* toughEnemies;
+@property (strong, nonatomic) NSMutableArray<Unit*>* healingEnemies;
 @property (strong, nonatomic) GameManager *gameManager;
 
 @property (strong, nonatomic) JoystickNode *joystick;
@@ -83,10 +84,11 @@
   self.players = [[NSMutableArray alloc] init];
   self.basicEnemies = [[NSMutableArray alloc] init];
   self.toughEnemies = [[NSMutableArray alloc] init];
+  self.healingEnemies = [[NSMutableArray alloc] init];
   self.enemyUnits = [[NSMutableDictionary alloc] init];
   [self.enemyUnits setObject:self.basicEnemies forKey:@"basicEnemies"];
   [self.enemyUnits setObject:self.toughEnemies forKey:@"toughEnemies"];
-  self.chosenColors = 3;
+  [self.enemyUnits setObject:self.healingEnemies forKey:@"healingEnemies"];
   NSArray<UIColor*>* listOfGameColors = @[[UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor yellowColor], [UIColor orangeColor], [UIColor purpleColor]];
   NSArray<GKState*>* listOfBarrierStates = @[[RedState alloc], [BlueState alloc], [GreenState alloc], [YellowState alloc], [OrangeState alloc], [PurpleState alloc]];
   self.numberOfGameColors = [listOfGameColors subarrayWithRange:NSMakeRange(0, self.chosenColors)];
@@ -98,6 +100,7 @@
   [GameManager sharedManager].scene = self;
   [GameManager sharedManager].isBasicEnabled = YES;
   [GameManager sharedManager].isToughEnabled = YES;
+  [GameManager sharedManager].isHealingEnabled = YES;
   [GameManager sharedManager].chosenColors = self.chosenColors;
   
   //Setup Component Systems

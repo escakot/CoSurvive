@@ -29,10 +29,13 @@
     _chosenColors = 2;
     _isBasicEnabled = NO;
     _isToughEnabled = NO;
+    _isHealingEnabled = NO;
     _basicUnitLimit = 30;
     _toughUnitLimit = 10;
+    _healingUnitLimit = 5;
     _basicUnitRespawnTime = 0.5;
     _toughUnitRespawnTime = 1;
+    _healingUnitRespawnTime = 0.2;
     _randomSource = [[GKARC4RandomSource alloc] init];
     _toughAgents = [[NSMutableArray alloc] init];
   }
@@ -52,6 +55,12 @@
   {
     [self spawnToughEnemyWithPlayers:players units:enemyUnits[@"toughEnemies"]];
     self.toughUnitPreviousSpawnTime = 0;
+  }
+  self.healingUnitPreviousSpawnTime += delta;
+  if (self.healingUnitPreviousSpawnTime > self.healingUnitRespawnTime && self.isHealingEnabled)
+  {
+    [self spawnHealingEnemyWithPlayers:players units:enemyUnits[@"healingEnemies"]];
+    self.healingUnitPreviousSpawnTime = 0;
   }
 }
 
@@ -87,6 +96,23 @@
     ToughEnemy* toughEnemy = (ToughEnemy*)[self spawnUnitOfClassType:[ToughEnemy class] withTarget:targetPlayer];
     
     [units addObject:toughEnemy];
+  }
+}
+
+- (void)spawnHealingEnemyWithPlayers:(NSMutableArray*)players units:(NSMutableArray*)units
+{
+  if (units.count >= self.healingUnitLimit)
+  {
+    return;
+  }
+  NSInteger randTarget = [self.randomSource nextIntWithUpperBound:players.count];
+  Player* targetPlayer = players[randTarget];
+  
+  if (!targetPlayer.isDead)
+  {
+    HealingEnemy* healingEnemy = (HealingEnemy*)[self spawnUnitOfClassType:[HealingEnemy class] withTarget:targetPlayer];
+    
+    [units addObject:healingEnemy];
   }
 }
 
@@ -164,6 +190,11 @@
       return nil;
       break;
   }
+}
+
+-(void)setDifficulty:(NSInteger)difficulty
+{
+  _difficulty = difficulty;
 }
 
 @end

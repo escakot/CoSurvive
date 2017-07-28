@@ -36,6 +36,7 @@
 		D1A697261F28BFD8002420CE /* BarrierComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1A697251F28BFD8002420CE /* BarrierComponent.m */; };
 		D1AA31841F2AFE85008AEE89 /* Settings.sks in Resources */ = {isa = PBXBuildFile; fileRef = D1AA31831F2AFE85008AEE89 /* Settings.sks */; };
 		D1AA318F1F2B000D008AEE89 /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AA318E1F2B000D008AEE89 /* Settings.m */; };
+		D1AA31951F2B6FAF008AEE89 /* HealingEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AA31941F2B6FAF008AEE89 /* HealingEnemy.m */; };
 		D1AD38CF1F29885100853613 /* ToughEnemy.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AD38CE1F29885100853613 /* ToughEnemy.m */; };
 		D1AD38D21F2A13EC00853613 /* ActionNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D1AD38D11F2A13EC00853613 /* ActionNode.m */; };
 		D1CA648D1F26B2DF00C40FA7 /* RenderComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648C1F26B2DF00C40FA7 /* RenderComponent.m */; };
@@ -98,6 +99,8 @@
 		D1AA31831F2AFE85008AEE89 /* Settings.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Settings.sks; sourceTree = "<group>"; };
 		D1AA318D1F2B000D008AEE89 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		D1AA318E1F2B000D008AEE89 /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
+		D1AA31931F2B6FAF008AEE89 /* HealingEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealingEnemy.h; sourceTree = "<group>"; };
+		D1AA31941F2B6FAF008AEE89 /* HealingEnemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealingEnemy.m; sourceTree = "<group>"; };
 		D1AD38CD1F29885100853613 /* ToughEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToughEnemy.h; sourceTree = "<group>"; };
 		D1AD38CE1F29885100853613 /* ToughEnemy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToughEnemy.m; sourceTree = "<group>"; };
 		D1AD38D01F2A13EC00853613 /* ActionNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionNode.h; sourceTree = "<group>"; };
@@ -162,6 +165,8 @@
 				D10448F81F278EAF0057488D /* BasicEnemy.m */,
 				D1AD38CD1F29885100853613 /* ToughEnemy.h */,
 				D1AD38CE1F29885100853613 /* ToughEnemy.m */,
+				D1AA31931F2B6FAF008AEE89 /* HealingEnemy.h */,
+				D1AA31941F2B6FAF008AEE89 /* HealingEnemy.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -367,6 +372,7 @@
 				D1CA649F1F26C4DC00C40FA7 /* MovementComponent.m in Sources */,
 				D10448FD1F27D9020057488D /* JoystickNode.m in Sources */,
 				D1A697201F28BF46002420CE /* BlueState.m in Sources */,
+				D1AA31951F2B6FAF008AEE89 /* HealingEnemy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

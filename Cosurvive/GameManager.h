@@ -13,6 +13,7 @@
 #import "Player.h"
 #import "BasicEnemy.h"
 #import "ToughEnemy.h"
+#import "HealingEnemy.h"
 #import "GameScene.h"
 
 @interface GameManager : NSObject
@@ -25,15 +26,19 @@
 
 @property (assign, nonatomic) BOOL isBasicEnabled;
 @property (assign, nonatomic) BOOL isToughEnabled;
+@property (assign, nonatomic) BOOL isHealingEnabled;
 
 @property (assign, nonatomic) NSInteger basicUnitLimit;
 @property (assign, nonatomic) NSInteger toughUnitLimit;
+@property (assign, nonatomic) NSInteger healingUnitLimit;
 
 
 @property (assign, nonatomic) NSTimeInterval basicUnitRespawnTime;
 @property (assign, nonatomic) NSTimeInterval basicUnitPreviousSpawnTime;
 @property (assign, nonatomic) NSTimeInterval toughUnitRespawnTime;
 @property (assign, nonatomic) NSTimeInterval toughUnitPreviousSpawnTime;
+@property (assign, nonatomic) NSTimeInterval healingUnitRespawnTime;
+@property (assign, nonatomic) NSTimeInterval healingUnitPreviousSpawnTime;
 
 @property (strong, nonatomic) GKARC4RandomSource *randomSource;
 @property (strong, nonatomic) NSMutableArray<GKAgent2D*> *toughAgents;
@@ -43,3 +48,4 @@
 - (void)spawnUnitsInScene:(GameScene*)scene players:(NSMutableArray*)players units:(NSMutableDictionary<NSMutableArray*,NSString*>*)enemyUnits time:(NSTimeInterval)delta;
 
 @end
+
