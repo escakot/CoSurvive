@@ -8,6 +8,15 @@
 
 #import "HealingEnemy.h"
 
+@interface HealingEnemy ()
+
+@property (strong, nonatomic) GKGoal *wanderGoal;
+@property (strong, nonatomic) GKGoal *fleeGoal;
+@property (strong, nonatomic) GKGoal *stopGoal;
+@property (assign, nonatomic) BOOL isFleeing;
+
+@end
+
 @implementation HealingEnemy
 
 - (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target withPhysics:(physicsBitMask)bitMask inScene:(GameScene*)scene
@@ -18,9 +27,9 @@
     self.size = CGSizeMake(25, 25);
     self.color = color;
     self.position = position;
-    self.speed = 160.0;
-    self.mass = 0.3;
-    self.acceleration = 200.0;
+    self.speed = 180.0;
+    self.mass = 0.1;
+    self.acceleration = 300.0;
     self.target = target;
     self.scene = scene;
     
@@ -32,6 +41,9 @@
     [self addComponent:physicsComponent];
     
     self.renderComponent.node.physicsBody = physicsComponent.physicsBody;
+    
+    self.statsComponent = [[StatsComponent alloc] initWithHealth:20 andDefence:10 andAttack:-15];
+    [self addComponent:self.statsComponent];
     
     //Drawing the shape of Basic Enemy
     CGPoint points[13];
@@ -65,8 +77,10 @@
     self.agent.maxAcceleration = self.acceleration;
     self.agent.position = (vector_float2){position.x, position.y};
     self.agent.behavior = [[GKBehavior alloc] init];
-    GKGoal *fleeGoal = [GKGoal goalToFleeAgent:target];
-    [self.agent.behavior setWeight:1.0 forGoal:fleeGoal];
+    self.fleeGoal = [GKGoal goalToFleeAgent:target];
+    self.stopGoal = [GKGoal goalToReachTargetSpeed:0];
+    self.wanderGoal = [GKGoal goalToWander:self.speed];
+//    [self.agent.behavior setWeight:1.0 forGoal:self.wanderGoal];
     //    float angle = atan2(target.position.x - position.x, target.position.y - position.y) / M_PI * 180;
     //    float corrected_angle = (angle - 90) * -1;
     //    corrected_angle = corrected_angle < 0 ? corrected_angle + 360 : corrected_angle;
@@ -99,11 +113,29 @@
   } else {
     self.renderComponent.node.hidden = NO;
   }
+  if (diffX > width/2 || diffX < -width/2 || diffY > width/2 || diffY < -width/2)
+  {
+    if (!self.isFleeing)
+    {
+      [agent.behavior setWeight:0 forGoal:self.fleeGoal];
+      [agent.behavior setWeight:10 forGoal:self.stopGoal];
+      [agent.behavior setWeight:100 forGoal:self.wanderGoal];
+      self.isFleeing = YES;
+    }
+  } else {
+    if (self.isFleeing)
+    {
+      [agent.behavior setWeight:0 forGoal:self.stopGoal];
+      [agent.behavior setWeight:0 forGoal:self.wanderGoal];
+      [agent.behavior setWeight:100 forGoal:self.fleeGoal];
+      self.isFleeing = NO;
+    }
+  }
   
 //  GKGoal *separateGoal = [GKGoal goalToSeparateFromAgents:self.agents maxDistance:self.size.width maxAngle:0];
 //  [self.agent.behavior setWeight:50.0 forGoal:separateGoal];
   self.renderComponent.node.position = CGPointMake(agent.position.x, agent.position.y);
-  //  self.renderComponent.node.zRotation = agent.rotation;
+    self.renderComponent.node.zRotation = agent.rotation;
 }
 
 @end

@@ -11,7 +11,6 @@
 @interface ToughEnemy : Unit
 
 @property (strong, nonatomic) AnimationComponent *animationComponent;
-@property (strong, nonatomic) HealthComponent *healthComponent;
 @property (strong, nonatomic) PhysicsComponent *physicsComponent;
 
 

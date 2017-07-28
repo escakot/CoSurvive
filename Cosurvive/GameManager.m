@@ -35,7 +35,7 @@
     _healingUnitLimit = 5;
     _basicUnitRespawnTime = 0.5;
     _toughUnitRespawnTime = 1;
-    _healingUnitRespawnTime = 0.2;
+    _healingUnitRespawnTime = 5;
     _randomSource = [[GKARC4RandomSource alloc] init];
     _toughAgents = [[NSMutableArray alloc] init];
   }
@@ -125,6 +125,8 @@
   
   //Calculate spawn location
   NSInteger randAxis = [self.randomSource nextIntWithUpperBound:2];
+  CGFloat randxDistance = (self.randomSource.nextUniform) * self.scene.size.width / 6;
+  CGFloat randyDistance = (self.randomSource.nextUniform) * self.scene.size.height / 5;
   float width = size.width * 1.2;
   float height = size.height * 1.2;
   CGFloat x; CGFloat y;
@@ -137,6 +139,8 @@
     y = (height * round(self.randomSource.nextUniform)) - height/2;
     
   }
+  x = x < 0 ? x - randxDistance : x + randxDistance;
+  y = y < 0 ? y - randyDistance : y + randyDistance;
   x += targetPlayer.renderComponent.node.position.x;
   y += targetPlayer.renderComponent.node.position.y;
   
@@ -195,6 +199,32 @@
 -(void)setDifficulty:(NSInteger)difficulty
 {
   _difficulty = difficulty;
+  float multiplier;
+  switch (difficulty)
+  {
+    case 1:{
+      multiplier = 1.5;
+      break;
+    }
+    case 2:{
+      multiplier = 2.2;
+      break;
+    }
+    case 3:{
+      multiplier = 3.5;
+      break;
+    }
+    default:{
+      multiplier = 1.0;
+      break;
+    }
+  }
+  self.basicUnitLimit = ceil(30 * multiplier);
+  self.toughUnitLimit = ceil(10 * multiplier);
+  self.healingUnitLimit = ceil(10 / multiplier);
+  self.basicUnitRespawnTime = (1.0 / multiplier);
+  self.toughUnitRespawnTime = (3.0 / multiplier);
+  self.healingUnitRespawnTime = (5.0 * multiplier);
 }
 
 @end

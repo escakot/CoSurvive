@@ -37,6 +37,9 @@
     AnimationComponent *animationComponent = [[AnimationComponent alloc] initWithSize:self.size andColor:self.color withShape:0];
     [self.renderComponent.node addChild:animationComponent.shape];
     
+    self.statsComponent = [[StatsComponent alloc] initWithHealth:40 andDefence:10 andAttack:15];
+    [self addComponent:self.statsComponent];
+    
     //GKAgent2D
     self.agent = [[GKAgent2D alloc] init];
     self.agent.delegate = self;

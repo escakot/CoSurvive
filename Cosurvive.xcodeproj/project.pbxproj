@@ -43,7 +43,7 @@
 		D1CA64901F26B59700C40FA7 /* PhysicsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */; };
 		D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */; };
 		D1CA649F1F26C4DC00C40FA7 /* MovementComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */; };
-		D1FECA861F28001C00DE1B96 /* HealthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FECA851F28001C00DE1B96 /* HealthComponent.m */; };
+		D1FECA861F28001C00DE1B96 /* StatsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FECA851F28001C00DE1B96 /* StatsComponent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,8 +113,8 @@
 		D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityPhysics.m; sourceTree = "<group>"; };
 		D1CA649D1F26C4DC00C40FA7 /* MovementComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovementComponent.h; sourceTree = "<group>"; };
 		D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovementComponent.m; sourceTree = "<group>"; };
-		D1FECA841F28001C00DE1B96 /* HealthComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HealthComponent.h; sourceTree = "<group>"; };
-		D1FECA851F28001C00DE1B96 /* HealthComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HealthComponent.m; sourceTree = "<group>"; };
+		D1FECA841F28001C00DE1B96 /* StatsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsComponent.h; sourceTree = "<group>"; };
+		D1FECA851F28001C00DE1B96 /* StatsComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsComponent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,8 +176,8 @@
 			children = (
 				D16B76081F265B130047A475 /* AnimationComponent.h */,
 				D16B76091F265B130047A475 /* AnimationComponent.m */,
-				D1FECA841F28001C00DE1B96 /* HealthComponent.h */,
-				D1FECA851F28001C00DE1B96 /* HealthComponent.m */,
+				D1FECA841F28001C00DE1B96 /* StatsComponent.h */,
+				D1FECA851F28001C00DE1B96 /* StatsComponent.m */,
 				D1CA649D1F26C4DC00C40FA7 /* MovementComponent.h */,
 				D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */,
 				D1CA648B1F26B2DF00C40FA7 /* RenderComponent.h */,
@@ -352,7 +352,7 @@
 				D1CA648D1F26B2DF00C40FA7 /* RenderComponent.m in Sources */,
 				D16B75EF1F22FC990047A475 /* Unit.m in Sources */,
 				D19CC1591F22CA4C00E97820 /* GameViewController.m in Sources */,
-				D1FECA861F28001C00DE1B96 /* HealthComponent.m in Sources */,
+				D1FECA861F28001C00DE1B96 /* StatsComponent.m in Sources */,
 				D1318B341F2929190010A1C7 /* HealthBarNode.m in Sources */,
 				D19CC14F1F22CA4C00E97820 /* AppDelegate.m in Sources */,
 				D1A697261F28BFD8002420CE /* BarrierComponent.m in Sources */,

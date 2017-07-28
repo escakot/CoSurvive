@@ -44,7 +44,7 @@
   self.numberOfColorsButton = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Number Of Colors: %li", self.numberOfColors]];
   self.numberOfColorsButton.position = CGPointMake(0, self.size.height/2 - self.size.height/3 - self.numberOfColorsButton.fontSize/2);
   [self addChild:self.numberOfColorsButton];
-  self.difficultyButton = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Dificulty: %@", self.difficultyLevels[self.difficulty]]];
+  self.difficultyButton = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Difficulty: %@", self.difficultyLevels[self.difficulty]]];
   self.difficultyButton.position = CGPointMake(0, -self.size.height/2 + self.size.height/2 - self.numberOfColorsButton.fontSize/2);
   [self addChild:self.difficultyButton];
   self.playerShapeButton = [[SKNode alloc] init];
@@ -62,7 +62,7 @@
   circle.fillColor = [UIColor redColor];
   self.numberOfShapes = @[square, circle];
   
-  [self.shapeNode addChild:square];
+  [self.shapeNode addChild:self.numberOfShapes[self.playerShape]];
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -99,6 +99,7 @@
     {
       self.difficulty++;
       self.difficultyButton.text = [NSString stringWithFormat:@"Difficulty: %@", self.difficultyLevels[self.difficulty % self.difficultyLevels.count]];
+      self.difficulty = self.difficulty % self.difficultyLevels.count;
     }
     if ([self.playerShapeButton containsPoint:touchLocation])
     {

@@ -1,5 +1,5 @@
 //
-//  HealthComponent.h
+//  StatsComponent.h
 //  Cosurvive
 //
 //  Created by Errol Cheong on 2017-07-25.
@@ -8,12 +8,16 @@
 
 #import <GameplayKit/GameplayKit.h>
 
-@interface HealthComponent : GKComponent
+@class Unit;
+@interface StatsComponent : GKComponent
 
 @property (assign, nonatomic) NSInteger maxHealthPoints;
 @property (assign, nonatomic) NSInteger healthPoints;
 @property (assign, nonatomic) NSInteger defencePoints;
+@property (assign, nonatomic) NSInteger attackPoints;
 
--(instancetype)initWithHealth:(NSUInteger)hp andDefence:(NSUInteger)dp;
+-(instancetype)initWithHealth:(NSInteger)hp andDefence:(NSInteger)dp andAttack:(NSInteger)ap;
+
+-(void)wasAttacked:(Unit*)unit;
 
 @end

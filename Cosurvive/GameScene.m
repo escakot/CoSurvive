@@ -79,7 +79,17 @@
   
   [self setupBackground];
   
-  //Game Configurations
+  //GameManager Settings
+  [self loadUserDefaultsIntoGameManager];
+  [GameManager sharedManager].scene = self;
+  [GameManager sharedManager].isBasicEnabled = YES;
+  [GameManager sharedManager].isToughEnabled = YES;
+  [GameManager sharedManager].isHealingEnabled = YES;
+//  [GameManager sharedManager].healingUnitLimit = 1000;
+//  [GameManager sharedManager].healingUnitRespawnTime = 0.5;
+  [GameManager sharedManager].chosenColors = self.chosenColors;
+  
+  //Game Setup
   self.playGame = YES;
   self.players = [[NSMutableArray alloc] init];
   self.basicEnemies = [[NSMutableArray alloc] init];
@@ -93,15 +103,6 @@
   NSArray<GKState*>* listOfBarrierStates = @[[RedState alloc], [BlueState alloc], [GreenState alloc], [YellowState alloc], [OrangeState alloc], [PurpleState alloc]];
   self.numberOfGameColors = [listOfGameColors subarrayWithRange:NSMakeRange(0, self.chosenColors)];
   self.numberOfBarrierStates = [listOfBarrierStates subarrayWithRange:NSMakeRange(0, self.chosenColors)];
-  
-  
-  //GameManager Settings
-  [self loadUserDefaultsIntoGameManager];
-  [GameManager sharedManager].scene = self;
-  [GameManager sharedManager].isBasicEnabled = YES;
-  [GameManager sharedManager].isToughEnabled = YES;
-  [GameManager sharedManager].isHealingEnabled = YES;
-  [GameManager sharedManager].chosenColors = self.chosenColors;
   
   //Setup Component Systems
   self.agentSystem = [[GKComponentSystem alloc] initWithComponentClass:[GKAgent2D class]];
@@ -157,6 +158,8 @@
   [self saveHighScoreToUserDefaults];
 }
 
+# pragma mark - Game methods
+
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
   
@@ -171,18 +174,17 @@
     if (contact.bodyB.categoryBitMask == playerCategory)
     {
       Player * playerBody = (Player*)contact.bodyB.node.entity;
-      playerBody.healthComponent.healthPoints -= 10;
+      [playerBody.statsComponent wasAttacked:enemyBody];
     }
   } else if (contact.bodyA.categoryBitMask == playerCategory)
   {
-    Player * playerBody = (Player*)contact.bodyA.node.entity;
-    playerBody.healthComponent.healthPoints -= 10;
     [contact.bodyB.node removeFromParent];
     Unit *enemyBody = (Unit*)contact.bodyB.node.entity;
     [self.basicEnemies removeObject:enemyBody];
     [self.toughEnemies removeObject:enemyBody];
     [self.agentSystem removeComponent:enemyBody.agent];
-    
+    Player * playerBody = (Player*)contact.bodyA.node.entity;
+    [playerBody.statsComponent wasAttacked:enemyBody];
   } else {
     [contact.bodyB.node removeFromParent];
     Unit *enemyBody = (Unit*)contact.bodyB.node.entity;
@@ -215,6 +217,8 @@
   for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
 }
 
+
+
 -(void)update:(CFTimeInterval)currentTime {
   // Called before each frame is rendered
   
@@ -242,10 +246,78 @@
   [self.agentSystem updateWithDeltaTime:dt];
 }
 
+- (void)checkGameOver
+{
+  Player *player = self.players[0];
+  if (player.isDead)
+  {
+    if (self.playGame)
+    {
+      [self saveHighScoreToUserDefaults];
+      self.playGame = NO;
+      GameOverNode *gameOverScreen = [[GameOverNode alloc] initWithScene:self withScore:[self.highscore integerValue]];
+      gameOverScreen.position = player.renderComponent.node.position;
+      gameOverScreen.zPosition = 10;
+      [self addChild:gameOverScreen];
+    }
+  }
+}
+
+
+# pragma mark - Saving/Loading Game
+
+-(void)saveHighScoreToUserDefaults
+{
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  self.highscore = self.score > [self.highscore integerValue] ? [NSNumber numberWithInteger:self.score] : self.highscore;
+  [userDefaults setValue:self.highscore forKey:@"highscore"];
+  [userDefaults synchronize];
+}
+
+-(void)loadUserDefaultsIntoGameManager
+{
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  [GameManager sharedManager].difficulty = [(NSNumber*)[userDefaults objectForKey:@"difficulty"] integerValue];
+  self.chosenColors = [(NSNumber*)[userDefaults objectForKey:@"numberOfColors"] integerValue];
+  self.chosenColors  = self.chosenColors < 2 ? 2 : self.chosenColors;
+  self.playerShape = [(NSNumber*)[userDefaults objectForKey:@"playerShape"] integerValue];
+  self.highscore = [userDefaults valueForKey:@"highscore"];
+}
+
+# pragma mark - Background methods
+
+- (void)setupBackground
+{
+//  NSInteger xTiles = ceil(self.size.width/512) + 2;
+//  NSInteger yTiles = ceil(self.size.height/512) + 2;
+//  CGFloat middleX = xTiles * 512 / 2 - 256;
+//  CGFloat middleY = yTiles * 512 / 2 - 256;
+  NSInteger xTiles = ceil(self.size.width/25) + 1;
+  NSInteger yTiles = ceil(self.size.height/25) + 1;
+  CGFloat middleX = xTiles * 25 / 2 - 25;
+  CGFloat middleY = yTiles * 25 / 2 ;
+  NSInteger randomTile = [[GKARC4RandomSource sharedRandom] nextIntWithUpperBound:(self.backgrounds[self.chosenBackground].integerValue)];
+  
+  self.backgroundTilesArray = [[NSMutableArray alloc] init];
+  for (int i = 0; i < yTiles; i++)
+  {
+    NSMutableArray *yTileArray = [[NSMutableArray alloc] init];
+    for (int j = 0; j < xTiles; j++)
+    {
+      SKSpriteNode *tile = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@%lu", self.chosenBackground, randomTile]]];
+//      SKSpriteNode *tile = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:@"galaxy"]];
+      tile.position = CGPointMake(j * 25 - middleX, middleY - i * 25);
+      [yTileArray addObject:tile];
+      [self addChild:tile];
+    }
+    [self.backgroundTilesArray addObject:yTileArray];
+  }
+}
+
 -(void)updateBackground
 {
   Player *player = self.players[0];
-  [self.healthBar setHealthBar:(float)player.healthComponent.healthPoints/(float)player.healthComponent.maxHealthPoints];
+  [self.healthBar setHealthBar:(float)player.statsComponent.healthPoints/(float)player.statsComponent.maxHealthPoints];
   self.healthBar.position = CGPointMake(player.renderComponent.node.position.x - self.size.width/2 + self.healthBar.size.width/2 + 30, player.renderComponent.node.position.y + self.size.height/2 - 20);
   self.scoreLabel.text = [NSString stringWithFormat:@"Score: %li", self.score];
   self.scoreLabel.position = CGPointMake(player.renderComponent.node.position.x + self.size.width/2 - 100
@@ -294,6 +366,9 @@
   
 }
 
+
+# pragma mark - Joystick methods
+
 -(void)updateJoystick:(JoystickNode *)joystick xValue:(float)x yValue:(float)y
 {
   Player *player = self.players[0];
@@ -304,69 +379,6 @@
 - (void)isPressed:(JoystickNode *)joystick isPressed:(BOOL)pressed
 {
   self.joystickIsPressed = pressed;
-}
-
-- (void)checkGameOver
-{
-  Player *player = self.players[0];
-  if (player.isDead)
-  {
-    if (self.playGame)
-    {
-      [self saveHighScoreToUserDefaults];
-      self.playGame = NO;
-      GameOverNode *gameOverScreen = [[GameOverNode alloc] initWithScene:self withScore:[self.highscore integerValue]];
-      gameOverScreen.position = player.renderComponent.node.position;
-      gameOverScreen.zPosition = 10;
-      [self addChild:gameOverScreen];
-    }
-  }
-}
-
--(void)saveHighScoreToUserDefaults
-{
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  self.highscore = self.score > [self.highscore integerValue] ? [NSNumber numberWithInteger:self.score] : self.highscore;
-  [userDefaults setValue:self.highscore forKey:@"highscore"];
-  [userDefaults synchronize];
-}
-
--(void)loadUserDefaultsIntoGameManager
-{
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  [GameManager sharedManager].difficulty = [(NSNumber*)[userDefaults objectForKey:@"difficulty"] integerValue];
-  self.chosenColors = [(NSNumber*)[userDefaults objectForKey:@"numberOfColors"] integerValue];
-  self.chosenColors  = self.chosenColors < 2 ? 2 : self.chosenColors;
-  self.playerShape = [(NSNumber*)[userDefaults objectForKey:@"playerShape"] integerValue];
-  self.highscore = [userDefaults valueForKey:@"highscore"];
-}
-
-- (void)setupBackground
-{
-//  NSInteger xTiles = ceil(self.size.width/512) + 2;
-//  NSInteger yTiles = ceil(self.size.height/512) + 2;
-//  CGFloat middleX = xTiles * 512 / 2 - 256;
-//  CGFloat middleY = yTiles * 512 / 2 - 256;
-  NSInteger xTiles = ceil(self.size.width/25) + 1;
-  NSInteger yTiles = ceil(self.size.height/25) + 1;
-  CGFloat middleX = xTiles * 25 / 2 - 25;
-  CGFloat middleY = yTiles * 25 / 2 ;
-  NSInteger randomTile = [[GKARC4RandomSource sharedRandom] nextIntWithUpperBound:(self.backgrounds[self.chosenBackground].integerValue)];
-  
-  self.backgroundTilesArray = [[NSMutableArray alloc] init];
-  for (int i = 0; i < yTiles; i++)
-  {
-    NSMutableArray *yTileArray = [[NSMutableArray alloc] init];
-    for (int j = 0; j < xTiles; j++)
-    {
-      SKSpriteNode *tile = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@%lu", self.chosenBackground, randomTile]]];
-//      SKSpriteNode *tile = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:@"galaxy"]];
-      tile.position = CGPointMake(j * 25 - middleX, middleY - i * 25);
-      [yTileArray addObject:tile];
-      [self addChild:tile];
-    }
-    [self.backgroundTilesArray addObject:yTileArray];
-  }
 }
 
 -(void)performAction:(NSString *)identifier

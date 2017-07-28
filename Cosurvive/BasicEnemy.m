@@ -33,6 +33,8 @@
     
     self.renderComponent.node.physicsBody = physicsComponent.physicsBody;
     
+    self.statsComponent = [[StatsComponent alloc] initWithHealth:15 andDefence:0 andAttack:10];
+    [self addComponent:self.statsComponent];
     
     //GKAgent2D
     self.agent = [[GKAgent2D alloc] init];

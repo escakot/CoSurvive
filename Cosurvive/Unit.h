@@ -10,7 +10,7 @@
 #import "RenderComponent.h"
 #import "AnimationComponent.h"
 #import "PhysicsComponent.h"
-#import "HealthComponent.h"
+#import "StatsComponent.h"
 #import "EntityPhysics.h"
 #import "GameScene.h"
 #import "HealthBarNode.h"
@@ -29,6 +29,7 @@
 @property (assign, nonatomic) CGPoint position;
 
 @property (strong, nonatomic) RenderComponent *renderComponent;
+@property (strong, nonatomic) StatsComponent *statsComponent;
 @property (strong, nonatomic) GKAgent2D *agent;
 @property (strong, nonatomic) GKAgent2D *target;
 

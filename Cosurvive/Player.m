@@ -32,8 +32,8 @@
     self.animationComponent = [[AnimationComponent alloc] initWithSize:self.size andColor:self.color withShape:shape];
     [self.renderComponent.node addChild:self.animationComponent.shape];
     
-    self.healthComponent = [[HealthComponent alloc] initWithHealth:100 andDefence:5];
-    [self addComponent:self.healthComponent];
+    self.statsComponent = [[StatsComponent alloc] initWithHealth:100 andDefence:5 andAttack:0];
+    [self addComponent:self.statsComponent];
     
     self.barrierComponent = [[BarrierComponent alloc] initWithPlayer:self withColor:color Size:CGSizeMake(self.size.width*2, self.size.height*2) withShape:shape];
     [self addComponent:self.barrierComponent];
@@ -61,7 +61,7 @@
 -(void)updateWithDeltaTime:(NSTimeInterval)seconds
 {
   float speed = self.speed * seconds * 60;
-  if (self.healthComponent.healthPoints <= 0)
+  if (self.statsComponent.healthPoints <= 0)
   {
     self.isDead = YES;
     [self.renderComponent.node removeFromParent];
