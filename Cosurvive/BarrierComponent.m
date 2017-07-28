@@ -28,7 +28,11 @@
     [player.renderComponent.node addChild:_sprite];
     _stateMachine = [[GKStateMachine alloc] initWithStates:
                      @[[[RedState alloc] initWithComponent:self],
-                       [[BlueState alloc] initWithComponent:self]
+                       [[BlueState alloc] initWithComponent:self],
+                       [[GreenState alloc] initWithComponent:self],
+                       [[YellowState alloc] initWithComponent:self],
+                       [[OrangeState alloc] initWithComponent:self],
+                       [[PurpleState alloc] initWithComponent:self]
                        ]];
     [_stateMachine enterState:[RedState class]];
   }

@@ -9,6 +9,10 @@
 #import <GameplayKit/GameplayKit.h>
 #import "RedState.h"
 #import "BlueState.h"
+#import "GreenState.h"
+#import "YellowState.h"
+#import "OrangeState.h"
+#import "PurpleState.h"
 
 @class Player;
 @interface BarrierComponent : GKComponent

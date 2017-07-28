@@ -15,6 +15,7 @@
   self = [super init];
   if (self) {
     _button = [SKShapeNode shapeNodeWithCircleOfRadius:radius];
+    _button.fillColor = [UIColor blueColor];
     [self addChild:_button];
     self.userInteractionEnabled = YES;
     

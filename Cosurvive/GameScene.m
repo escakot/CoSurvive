@@ -21,13 +21,18 @@
 @property (nonatomic, readwrite) GKComponentSystem *agentSystem;
 @property (nonatomic, readwrite) GKComponentSystem *animationSystem;
 
+@property (strong, nonatomic) NSArray<UIColor*>* numberOfGameColors;
+@property (strong, nonatomic) NSArray<GKState*>* numberOfBarrierStates;
+@property (assign, nonatomic) NSUInteger chosenColors;
+
 @property (strong, nonatomic) NSMutableArray<Player*> *players;
 @property (strong, nonatomic) NSMutableDictionary* enemyUnits;
 @property (strong, nonatomic) NSMutableArray<Unit*>* basicEnemies;
 @property (strong, nonatomic) NSMutableArray<Unit*>* toughEnemies;
 @property (strong, nonatomic) GameManager *gameManager;
 
-//@property (strong, nonatomic) JoystickNode *joystick;
+@property (strong, nonatomic) JoystickNode *joystick;
+@property (strong, nonatomic) ActionNode *colorButton;
 @property (strong, nonatomic) SKSpriteNode *changeColorButton;
 @property (assign, nonatomic) BOOL joystickIsPressed;
 
@@ -68,7 +73,7 @@
 -(void)didMoveToView:(SKView *)view
 {
   //Setup Background Texture
-//  [self setupBackground];
+  //  [self setupBackground];
   
   //Game Configurations
   self.playGame = YES;
@@ -78,12 +83,19 @@
   self.enemyUnits = [[NSMutableDictionary alloc] init];
   [self.enemyUnits setObject:self.basicEnemies forKey:@"basicEnemies"];
   [self.enemyUnits setObject:self.toughEnemies forKey:@"toughEnemies"];
+  self.chosenColors = 3;
+  NSArray<UIColor*>* listOfGameColors = @[[UIColor redColor], [UIColor blueColor], [UIColor greenColor], [UIColor yellowColor], [UIColor orangeColor], [UIColor purpleColor]];
+  NSArray<GKState*>* listOfBarrierStates = @[[RedState alloc], [BlueState alloc], [GreenState alloc], [YellowState alloc], [OrangeState alloc], [PurpleState alloc]];
+  self.numberOfGameColors = [listOfGameColors subarrayWithRange:NSMakeRange(0, self.chosenColors)];
+  self.numberOfBarrierStates = [listOfBarrierStates subarrayWithRange:NSMakeRange(0, self.chosenColors)];
+  
   
   //GameManager Settings
   [GameManager sharedManager].scene = self;
   [GameManager sharedManager].isBasicEnabled = YES;
   [GameManager sharedManager].isToughEnabled = YES;
   [GameManager sharedManager].toughUnitLimit = 50;
+  [GameManager sharedManager].chosenColors = self.chosenColors;
   
   //Setup Component Systems
   self.agentSystem = [[GKComponentSystem alloc] initWithComponentClass:[GKAgent2D class]];
@@ -113,11 +125,18 @@
   self.joystick.userInteractionEnabled = YES;
   self.joystick.delegate = self;
   self.joystick.position = CGPointMake(-self.size.width/2 + 100, -self.size.height/2 + 100);
+  self.joystick.zPosition = 100.0;
   [player.renderComponent.node addChild:self.joystick];
   
-  self.changeColorButton = [[SKSpriteNode alloc] initWithColor:[UIColor blueColor] size:CGSizeMake(30, 30)];
-  self.changeColorButton.position = CGPointMake(self.size.width/2 - 100, -self.size.height/2 + 100);
-  [player.renderComponent.node addChild:self.changeColorButton];
+  
+  self.colorButton = [[ActionNode alloc] initWithSize:15.0 withIdentifier:@"color"];
+  self.colorButton.delegate = self;
+  self.colorButton.position = CGPointMake(self.size.width/2 - 60, -self.size.height/2 + 60);
+  self.colorButton.zPosition = 100.0;
+  [player.renderComponent.node addChild:self.colorButton];
+  //  self.changeColorButton = [[SKSpriteNode alloc] initWithColor:[UIColor blueColor] size:CGSizeMake(30, 30)];
+  //  self.changeColorButton.position = CGPointMake(self.size.width/2 - 100, -self.size.height/2 + 100);
+  //  [player.renderComponent.node addChild:self.changeColorButton];
   
   
   //Score and Health
@@ -178,22 +197,6 @@
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-  Player *player = self.players[0];
-  for (UITouch * touch in touches) {
-    CGPoint location = [touch locationInNode:player.renderComponent.node];
-    if ([self.changeColorButton containsPoint:location])
-    {
-      if ([self.changeColorButton.color isEqual:[UIColor blueColor]])
-      {
-        [player.barrierComponent.stateMachine enterState:[BlueState class]];
-        self.changeColorButton.color = [UIColor redColor];
-      } else {
-        [player.barrierComponent.stateMachine enterState:[RedState class]];
-        self.changeColorButton.color = [UIColor blueColor];
-        
-      }
-    }
-  }
   for (UITouch *t in touches) {[self touchDownAtPoint:[t locationInNode:self]];}
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -218,9 +221,9 @@
   CGFloat dt = currentTime - _lastUpdateTime;
   
   [[GameManager sharedManager] spawnUnitsInScene:self players:self.players units:self.enemyUnits time:dt];
-//  NSLog(@"%li", self.basicEnemies.count);
-//  NSLog(@"%li", self.toughEnemies.count);
-//  NSLog(@"%li", self.agentSystem.components.count);
+  //  NSLog(@"%li", self.basicEnemies.count);
+  //  NSLog(@"%li", self.toughEnemies.count);
+  //  NSLog(@"%li", self.agentSystem.components.count);
   
   // Update entities
   for (GKEntity *entity in self.entities) {
@@ -241,30 +244,30 @@
   self.scoreLabel.text = [NSString stringWithFormat:@"Score: %li", self.score];
   self.scoreLabel.position = CGPointMake(player.renderComponent.node.position.x + self.size.width/2 - 100
                                          ,player.renderComponent.node.position.y + self.size.height/2 - 50 );
-//  NSLog(@"%@", NSStringFromCGPoint(player.renderComponent.node.position));
-//  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture1.position));
-//  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture2.position));
+  //  NSLog(@"%@", NSStringFromCGPoint(player.renderComponent.node.position));
+  //  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture1.position));
+  //  NSLog(@"%@", NSStringFromCGPoint(self.bgTexture2.position));
   
-//  if ((self.bgCount % 2) == 0)
-//  {
-//    if (self.bgTexture1.position.x < player.renderComponent.node.position.x - 100 ||
-//        self.bgTexture1.position.x > player.renderComponent.node.position.x + 100 ||
-//        self.bgTexture1.position.y < player.renderComponent.node.position.y - 100 ||
-//        self.bgTexture1.position.y > player.renderComponent.node.position.y + 100)
-//    {
-//      self.bgTexture2.position = player.renderComponent.node.position;
-//      self.bgCount++;
-//    }
-//  } else {
-//    if (self.bgTexture2.position.x < player.renderComponent.node.position.x - 100 ||
-//        self.bgTexture2.position.x > player.renderComponent.node.position.x + 100 ||
-//        self.bgTexture2.position.y < player.renderComponent.node.position.y - 100 ||
-//        self.bgTexture2.position.y > player.renderComponent.node.position.y + 100)
-//    {
-//      self.bgTexture1.position = player.renderComponent.node.position;
-//      self.bgCount++;
-//    }
-//  }
+  //  if ((self.bgCount % 2) == 0)
+  //  {
+  //    if (self.bgTexture1.position.x < player.renderComponent.node.position.x - 100 ||
+  //        self.bgTexture1.position.x > player.renderComponent.node.position.x + 100 ||
+  //        self.bgTexture1.position.y < player.renderComponent.node.position.y - 100 ||
+  //        self.bgTexture1.position.y > player.renderComponent.node.position.y + 100)
+  //    {
+  //      self.bgTexture2.position = player.renderComponent.node.position;
+  //      self.bgCount++;
+  //    }
+  //  } else {
+  //    if (self.bgTexture2.position.x < player.renderComponent.node.position.x - 100 ||
+  //        self.bgTexture2.position.x > player.renderComponent.node.position.x + 100 ||
+  //        self.bgTexture2.position.y < player.renderComponent.node.position.y - 100 ||
+  //        self.bgTexture2.position.y > player.renderComponent.node.position.y + 100)
+  //    {
+  //      self.bgTexture1.position = player.renderComponent.node.position;
+  //      self.bgCount++;
+  //    }
+  //  }
 }
 
 -(void)updateJoystick:(JoystickNode *)joystick xValue:(float)x yValue:(float)y
@@ -326,7 +329,7 @@
   self.bgTexture7.position = CGPointMake(-self.bgTexture1.size.width, -self.bgTexture1.size.height);
   self.bgTexture8.position = CGPointMake(0, -self.bgTexture1.size.height);
   self.bgTexture9.position = CGPointMake(self.bgTexture1.size.width, -self.bgTexture1.size.height);
-//  NSLog(@"%@", NSStringFromCGSize(self.bgTexture1.size));
+  //  NSLog(@"%@", NSStringFromCGSize(self.bgTexture1.size));
   [self addChild:self.bgTexture1];
   [self addChild:self.bgTexture2];
   [self addChild:self.bgTexture3];
@@ -336,7 +339,20 @@
   [self addChild:self.bgTexture7];
   [self addChild:self.bgTexture8];
   [self addChild:self.bgTexture9];
-  
+}
+
+-(void)performAction:(NSString *)identifier
+{
+  if ([identifier isEqualToString:@"color"])
+  {
+    Player *player = self.players[0];
+    player.animationComponent.sprite.color = self.colorButton.button.fillColor;
+    player.barrierComponent.sprite.color = self.colorButton.button.fillColor;
+    NSUInteger currentColorIndex = [self.numberOfGameColors indexOfObject:self.colorButton.button.fillColor];
+    NSUInteger nextColorIndex = (currentColorIndex + 1) % self.numberOfGameColors.count;
+    self.colorButton.button.fillColor = self.numberOfGameColors[nextColorIndex];
+    [player.barrierComponent.stateMachine enterState:[self.numberOfBarrierStates[nextColorIndex] class]];
+  }
 }
 
 @end

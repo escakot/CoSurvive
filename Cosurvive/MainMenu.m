@@ -62,6 +62,28 @@
       //      skView.showsFPS = YES;
       //      skView.showsNodeCount = YES;
     }
+    if ([self.startGameButton containsPoint:location])
+    {
+      GKScene *scene = [GKScene sceneWithFileNamed:@"GameScene"];
+      
+      // Get the SKScene from the loaded GKScene
+      GameScene *sceneNode = (GameScene *)scene.rootNode;
+      
+      // Copy gameplay related content over to the scene
+      sceneNode.entities = [scene.entities mutableCopy];
+      sceneNode.graphs = [scene.graphs mutableCopy];
+      
+      // Set the scale mode to scale to fit the window
+      sceneNode.scaleMode = SKSceneScaleModeResizeFill;
+      
+      SKView *skView = (SKView *)self.view;
+      
+      // Present the scene
+      [skView presentScene:sceneNode];
+      
+      //      skView.showsFPS = YES;
+      //      skView.showsNodeCount = YES;
+    }
   }
   
 }

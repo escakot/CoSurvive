@@ -18,6 +18,5 @@
 @property (nonatomic, readonly) GKComponentSystem *agentSystem;
 @property (nonatomic, readonly) GKComponentSystem *animationSystem;
 @property (nonatomic, readonly) GKComponentSystem *physicsSystem;
-@property (strong, nonatomic) JoystickNode *joystick;
 
 @end

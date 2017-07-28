@@ -22,4 +22,6 @@
 
 @property (weak, nonatomic) id <ActionButtonDelegate> delegate;
 
+- (instancetype)initWithSize:(CGFloat)radius withIdentifier:(NSString*)identifier;
+
 @end
