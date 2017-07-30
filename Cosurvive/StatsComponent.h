@@ -20,4 +20,6 @@
 
 -(void)wasAttacked:(Unit*)unit;
 
+-(BOOL)isKilled;
+
 @end

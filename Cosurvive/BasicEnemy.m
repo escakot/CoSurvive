@@ -90,6 +90,11 @@
   } else {
     self.renderComponent.node.hidden = NO;
   }
+  if (diffX > width*2 || diffX < -width*2 || diffY > width*2 || diffY < -width*2)
+  {
+    self.isDead = YES;
+  }
+  
   self.renderComponent.node.position = CGPointMake(agent.position.x, agent.position.y);
   self.renderComponent.node.zRotation = agent.rotation;
 }

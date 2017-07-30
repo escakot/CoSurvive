@@ -7,6 +7,7 @@
 //
 
 #import "RenderComponent.h"
+#import "Unit.h"
 
 @implementation RenderComponent
 
@@ -29,6 +30,13 @@
   self.node.entity = nil;
 }
 
-
+-(void)updateWithDeltaTime:(NSTimeInterval)seconds
+{
+  Unit *unit = (Unit*)self.entity;
+  float speed = unit.speed * seconds * 60;
+  CGPoint location = self.node.position;
+  CGPoint newLocation = CGPointMake(location.x + (unit.xVelocity * speed), location.y + (unit.yVelocity * speed));
+  self.node.position = newLocation;
+}
 
 @end

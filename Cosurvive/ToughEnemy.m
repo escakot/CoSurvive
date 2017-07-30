@@ -18,9 +18,9 @@
     self.size = CGSizeMake(25, 25);
     self.color = color;
     self.position = position;
-    self.speed = 50.0;
+    self.speed = 65.0;
     self.mass = 0.1;
-    self.acceleration = 50.0;
+    self.acceleration = 100.0;
     self.radius = 12.5;
     self.target = target;
     self.scene = scene;
@@ -49,7 +49,9 @@
     self.agent.position = (vector_float2){position.x, position.y};
     self.agent.behavior = [[GKBehavior alloc] init];
     GKGoal *seekGoal = [GKGoal goalToSeekAgent:target];
+  	GKGoal *separateGoal = [GKGoal goalToSeparateFromAgents:@[self.agent] maxDistance:100 maxAngle:M_PI*2];
     [self.agent.behavior setWeight:1.0 forGoal:seekGoal];
+    [self.agent.behavior setWeight:100.0 forGoal:separateGoal];
     //    float angle = atan2(target.position.x - position.x, target.position.y - position.y) / M_PI * 180;
     //    float corrected_angle = (angle - 90) * -1;
     //    corrected_angle = corrected_angle < 0 ? corrected_angle + 360 : corrected_angle;
@@ -82,8 +84,16 @@
   } else {
     self.renderComponent.node.hidden = NO;
   }
+  if (diffX > width*2 || diffX < -width*2 || diffY > width*2 || diffY < -width*2)
+  {
+    self.isDead = YES;
+  }
   
-//  GKGoal *separateGoal = [GKGoal goalToSeparateFromAgents:self.agents maxDistance:self.size.width maxAngle:0];
+//  NSMutableArray *agents = [[NSMutableArray alloc] init];
+//  for (ToughEnemy *enemy in self.agents) {
+//    [agents addObject:enemy.agent];
+//  }
+//  GKGoal *separateGoal = [GKGoal goalToSeparateFromAgents:agents maxDistance:100 maxAngle:M_PI*2];
 //  [self.agent.behavior setWeight:50.0 forGoal:separateGoal];
   self.renderComponent.node.position = CGPointMake(agent.position.x, agent.position.y);
   //  self.renderComponent.node.zRotation = agent.rotation;

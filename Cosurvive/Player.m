@@ -60,15 +60,11 @@
 
 -(void)updateWithDeltaTime:(NSTimeInterval)seconds
 {
-  float speed = self.speed * seconds * 60;
-  if (self.statsComponent.healthPoints <= 0)
+  
+  self.isDead = [self.statsComponent isKilled];
+  if (!self.isDead)
   {
-    self.isDead = YES;
-    [self.renderComponent.node removeFromParent];
-  } else {
-    CGPoint location = self.renderComponent.node.position;
-    CGPoint newLocation = CGPointMake(location.x + (self.xVelocity * speed), location.y + (self.yVelocity * speed));
-    self.renderComponent.node.position = newLocation;
+    [self.renderComponent updateWithDeltaTime:seconds];
   }
   
 }

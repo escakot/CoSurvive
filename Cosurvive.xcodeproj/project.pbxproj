@@ -42,7 +42,6 @@
 		D1CA648D1F26B2DF00C40FA7 /* RenderComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648C1F26B2DF00C40FA7 /* RenderComponent.m */; };
 		D1CA64901F26B59700C40FA7 /* PhysicsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */; };
 		D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */; };
-		D1CA649F1F26C4DC00C40FA7 /* MovementComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */; };
 		D1FECA861F28001C00DE1B96 /* StatsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FECA851F28001C00DE1B96 /* StatsComponent.m */; };
 /* End PBXBuildFile section */
 
@@ -111,8 +110,6 @@
 		D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsComponent.m; sourceTree = "<group>"; };
 		D1CA649A1F26BDB900C40FA7 /* EntityPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityPhysics.h; sourceTree = "<group>"; };
 		D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityPhysics.m; sourceTree = "<group>"; };
-		D1CA649D1F26C4DC00C40FA7 /* MovementComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovementComponent.h; sourceTree = "<group>"; };
-		D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovementComponent.m; sourceTree = "<group>"; };
 		D1FECA841F28001C00DE1B96 /* StatsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsComponent.h; sourceTree = "<group>"; };
 		D1FECA851F28001C00DE1B96 /* StatsComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsComponent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +138,22 @@
 				D15EE73C1F295DDB001CE398 /* GameOverNode.m */,
 			);
 			name = Nodes;
+			sourceTree = "<group>";
+		};
+		D10B47381F2E6B27009E04F6 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				D19CC16A1F22CDE500E97820 /* MainMenu.h */,
+				D19CC16B1F22CDE500E97820 /* MainMenu.m */,
+				D1AA318D1F2B000D008AEE89 /* Settings.h */,
+				D1AA318E1F2B000D008AEE89 /* Settings.m */,
+				D19CC1571F22CA4C00E97820 /* GameViewController.h */,
+				D19CC1581F22CA4C00E97820 /* GameViewController.m */,
+				D19CC1501F22CA4C00E97820 /* GameScene.sks */,
+				D19CC1681F22CD3400E97820 /* MainMenu.sks */,
+				D1AA31831F2AFE85008AEE89 /* Settings.sks */,
+			);
+			name = Scenes;
 			sourceTree = "<group>";
 		};
 		D166908D1F26D1AA00FE430A /* Game Settings */ = {
@@ -178,8 +191,6 @@
 				D16B76091F265B130047A475 /* AnimationComponent.m */,
 				D1FECA841F28001C00DE1B96 /* StatsComponent.h */,
 				D1FECA851F28001C00DE1B96 /* StatsComponent.m */,
-				D1CA649D1F26C4DC00C40FA7 /* MovementComponent.h */,
-				D1CA649E1F26C4DC00C40FA7 /* MovementComponent.m */,
 				D1CA648B1F26B2DF00C40FA7 /* RenderComponent.h */,
 				D1CA648C1F26B2DF00C40FA7 /* RenderComponent.m */,
 				D1CA648E1F26B59700C40FA7 /* PhysicsComponent.h */,
@@ -221,6 +232,7 @@
 				D16B75E61F22FAC00047A475 /* Entities */,
 				D10448FA1F27D8E10057488D /* Nodes */,
 				D166908D1F26D1AA00FE430A /* Game Settings */,
+				D10B47381F2E6B27009E04F6 /* Scenes */,
 				D19CC14A1F22CA4C00E97820 /* Supporting Files */,
 			);
 			path = Cosurvive;
@@ -229,15 +241,6 @@
 		D19CC14A1F22CA4C00E97820 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D19CC1571F22CA4C00E97820 /* GameViewController.h */,
-				D19CC1581F22CA4C00E97820 /* GameViewController.m */,
-				D19CC1501F22CA4C00E97820 /* GameScene.sks */,
-				D19CC1681F22CD3400E97820 /* MainMenu.sks */,
-				D1AA31831F2AFE85008AEE89 /* Settings.sks */,
-				D19CC16A1F22CDE500E97820 /* MainMenu.h */,
-				D19CC16B1F22CDE500E97820 /* MainMenu.m */,
-				D1AA318D1F2B000D008AEE89 /* Settings.h */,
-				D1AA318E1F2B000D008AEE89 /* Settings.m */,
 				D19CC1621F22CA4C00E97820 /* Info.plist */,
 				D19CC15F1F22CA4C00E97820 /* LaunchScreen.storyboard */,
 				D19CC14D1F22CA4C00E97820 /* AppDelegate.h */,
@@ -369,7 +372,6 @@
 				D14B00791F2AB57F00DB60D0 /* OrangeState.m in Sources */,
 				D10448F91F278EAF0057488D /* BasicEnemy.m in Sources */,
 				D19CC14C1F22CA4C00E97820 /* main.m in Sources */,
-				D1CA649F1F26C4DC00C40FA7 /* MovementComponent.m in Sources */,
 				D10448FD1F27D9020057488D /* JoystickNode.m in Sources */,
 				D1A697201F28BF46002420CE /* BlueState.m in Sources */,
 				D1AA31951F2B6FAF008AEE89 /* HealingEnemy.m in Sources */,

@@ -95,6 +95,7 @@
   {
     ToughEnemy* toughEnemy = (ToughEnemy*)[self spawnUnitOfClassType:[ToughEnemy class] withTarget:targetPlayer];
     
+//    toughEnemy.agents = units;
     [units addObject:toughEnemy];
   }
 }
@@ -158,41 +159,34 @@
     {
       return [[type alloc] initWithColor:[UIColor redColor] atPosition:spawnLocation withTarget:targetPlayer.agent
                              withPhysics:[EntityPhysics redEnemy] inScene:self.scene];
-      break;
     }
     case 1:
     {
       return [[type alloc] initWithColor:[UIColor blueColor] atPosition:spawnLocation withTarget:targetPlayer.agent
                              withPhysics:[EntityPhysics blueEnemy] inScene:self.scene];
-      break;
     }
     case 2:
     {
       return [[type alloc] initWithColor:[UIColor greenColor] atPosition:spawnLocation withTarget:targetPlayer.agent
                              withPhysics:[EntityPhysics greenEnemy] inScene:self.scene];
-      break;
     }
     case 3:
     {
       return [[type alloc] initWithColor:[UIColor yellowColor] atPosition:spawnLocation withTarget:targetPlayer.agent
                              withPhysics:[EntityPhysics yellowEnemy] inScene:self.scene];
-      break;
     }
     case 4:
     {
       return [[type alloc] initWithColor:[UIColor orangeColor] atPosition:spawnLocation withTarget:targetPlayer.agent
                              withPhysics:[EntityPhysics orangeEnemy] inScene:self.scene];
-      break;
     }
     case 5:
     {
       return [[type alloc] initWithColor:[UIColor purpleColor] atPosition:spawnLocation withTarget:targetPlayer.agent
                              withPhysics:[EntityPhysics purpleEnemy] inScene:self.scene];
-      break;
     }
     default:
       return nil;
-      break;
   }
 }
 

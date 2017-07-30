@@ -35,4 +35,15 @@
   }
 }
 
+-(BOOL)isKilled
+{
+  Unit *unit = (Unit*)self.entity;
+  if (self.healthPoints <= 0)
+  {
+    [unit.renderComponent.node removeFromParent];
+    return YES;
+  }
+  return NO;
+}
+
 @end

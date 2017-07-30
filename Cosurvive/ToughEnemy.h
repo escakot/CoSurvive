@@ -13,6 +13,7 @@
 @property (strong, nonatomic) AnimationComponent *animationComponent;
 @property (strong, nonatomic) PhysicsComponent *physicsComponent;
 
+//@property (strong, nonatomic) NSMutableArray* agents;
 
 - (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target withPhysics:(physicsBitMask)bitMask inScene:(GameScene*)scene;
 

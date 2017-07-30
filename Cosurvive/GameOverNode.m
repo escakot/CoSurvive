@@ -64,8 +64,8 @@
       // Present the scene
       [skView presentScene:sceneNode];
       
-      skView.showsFPS = YES;
-      skView.showsNodeCount = YES;
+//      skView.showsFPS = YES;
+//      skView.showsNodeCount = YES;
     }
     if ([self.mainMenuButton containsPoint:touchLocation])
     {

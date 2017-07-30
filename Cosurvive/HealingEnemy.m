@@ -118,7 +118,7 @@
     if (!self.isFleeing)
     {
       [agent.behavior setWeight:0 forGoal:self.fleeGoal];
-      [agent.behavior setWeight:10 forGoal:self.stopGoal];
+      [agent.behavior setWeight:1 forGoal:self.stopGoal];
       [agent.behavior setWeight:100 forGoal:self.wanderGoal];
       self.isFleeing = YES;
     }
@@ -127,9 +127,13 @@
     {
       [agent.behavior setWeight:0 forGoal:self.stopGoal];
       [agent.behavior setWeight:0 forGoal:self.wanderGoal];
-      [agent.behavior setWeight:100 forGoal:self.fleeGoal];
+      [agent.behavior setWeight:100000 forGoal:self.fleeGoal];
       self.isFleeing = NO;
     }
+  }
+  if (diffX > width*2 || diffX < -width*2 || diffY > width*2 || diffY < -width*2)
+  {
+    self.isDead = YES;
   }
   
 //  GKGoal *separateGoal = [GKGoal goalToSeparateFromAgents:self.agents maxDistance:self.size.width maxAngle:0];

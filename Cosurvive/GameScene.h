@@ -9,7 +9,6 @@
 #import <SpriteKit/SpriteKit.h>
 #import <GameplayKit/GameplayKit.h>
 
-@class JoystickNode;
 @interface GameScene : SKScene
 
 @property (nonatomic) NSMutableArray<GKEntity *> *entities;
@@ -18,5 +17,6 @@
 @property (nonatomic, readonly) GKComponentSystem *agentSystem;
 @property (nonatomic, readonly) GKComponentSystem *animationSystem;
 @property (nonatomic, readonly) GKComponentSystem *physicsSystem;
+
 
 @end

@@ -36,4 +36,6 @@
 @property (strong, nonatomic) GameScene *scene;
 @property (strong, nonatomic) HealthBarNode *healthBar;
 
+@property (assign, nonatomic) BOOL isDead;
+
 @end

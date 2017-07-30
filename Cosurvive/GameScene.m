@@ -52,8 +52,6 @@
 @property (assign, nonatomic) NSInteger playerShape;
 @property (assign, nonatomic) NSInteger chosenColors;
 
-
-
 @end
 
 @implementation GameScene {
@@ -162,14 +160,11 @@
 
 -(void)didBeginContact:(SKPhysicsContact *)contact
 {
-  
+  Unit *enemyBody;
   if (contact.bodyA.categoryBitMask == enemyCategory)
   {
     [contact.bodyA.node removeFromParent];
-    Unit *enemyBody = (Unit*)contact.bodyA.node.entity;
-    [self.basicEnemies removeObject:enemyBody];
-    [self.toughEnemies removeObject:enemyBody];
-    [self.agentSystem removeComponent:enemyBody.agent];
+    enemyBody = (Unit*)contact.bodyA.node.entity;
     self.score++;
     if (contact.bodyB.categoryBitMask == playerCategory)
     {
@@ -179,20 +174,18 @@
   } else if (contact.bodyA.categoryBitMask == playerCategory)
   {
     [contact.bodyB.node removeFromParent];
-    Unit *enemyBody = (Unit*)contact.bodyB.node.entity;
-    [self.basicEnemies removeObject:enemyBody];
-    [self.toughEnemies removeObject:enemyBody];
-    [self.agentSystem removeComponent:enemyBody.agent];
+    enemyBody = (Unit*)contact.bodyB.node.entity;
     Player * playerBody = (Player*)contact.bodyA.node.entity;
     [playerBody.statsComponent wasAttacked:enemyBody];
   } else {
     [contact.bodyB.node removeFromParent];
-    Unit *enemyBody = (Unit*)contact.bodyB.node.entity;
-    [self.basicEnemies removeObject:enemyBody];
-    [self.toughEnemies removeObject:enemyBody];
-    [self.agentSystem removeComponent:enemyBody.agent];
+    enemyBody = (Unit*)contact.bodyB.node.entity;
     self.score++;
   }
+  [self.basicEnemies removeObject:enemyBody];
+  [self.toughEnemies removeObject:enemyBody];
+  [self.healingEnemies removeObject:enemyBody];
+  [self.agentSystem removeComponent:enemyBody.agent];
 }
 
 - (void)touchDownAtPoint:(CGPoint)pos {
@@ -231,14 +224,40 @@
   CGFloat dt = currentTime - _lastUpdateTime;
   
   [[GameManager sharedManager] spawnUnitsInScene:self players:self.players units:self.enemyUnits time:dt];
-  //  NSLog(@"%li", self.basicEnemies.count);
-  //  NSLog(@"%li", self.toughEnemies.count);
-  //  NSLog(@"%li", self.agentSystem.components.count);
+//    NSLog(@"%li", self.basicEnemies.count);
+//    NSLog(@"%li", self.toughEnemies.count);
+//    NSLog(@"%li", self.agentSystem.components.count);
   
   // Update entities
   for (GKEntity *entity in self.entities) {
     [entity updateWithDeltaTime:dt];
   }
+  //Update enemies
+  NSMutableArray *discardedObjects = [@[] mutableCopy];
+  for (Unit* unit in self.healingEnemies)
+  {
+    if (unit.isDead)
+    {
+        [discardedObjects addObject:unit];
+        [unit.renderComponent.node removeFromParent];
+        [self.agentSystem removeComponent:unit.agent];
+      
+    }
+  }
+  [self.healingEnemies removeObjectsInArray:discardedObjects];
+//  for (NSMutableArray* units in self.enemyUnits) {
+//    NSMutableArray *discardedObjects = [@[] mutableCopy];
+//    for (Unit *unit in self.enemyUnits[units])
+//    {
+//      if (unit.isDead)
+//      {
+//        [discardedObjects addObject:unit];
+//        [unit.renderComponent.node removeFromParent];
+//        [self.agentSystem removeComponent:unit.agent];
+//      }
+//    }
+//    [self.enemyUnits[units] removeObjectsInArray:discardedObjects];
+//  }
   
   _lastUpdateTime = currentTime;
   [self checkGameOver];
