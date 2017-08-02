@@ -16,7 +16,6 @@
 		D14B00791F2AB57F00DB60D0 /* OrangeState.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B00781F2AB57F00DB60D0 /* OrangeState.m */; };
 		D14B007C1F2AB58600DB60D0 /* PurpleState.m in Sources */ = {isa = PBXBuildFile; fileRef = D14B007B1F2AB58600DB60D0 /* PurpleState.m */; };
 		D15EE73D1F295DDB001CE398 /* GameOverNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D15EE73C1F295DDB001CE398 /* GameOverNode.m */; };
-		D16690901F26D1C000FE430A /* GameConfigurations.m in Sources */ = {isa = PBXBuildFile; fileRef = D166908F1F26D1C000FE430A /* GameConfigurations.m */; };
 		D16690931F26F0CB00FE430A /* GameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D16690921F26F0CB00FE430A /* GameManager.m */; };
 		D16B75E91F22FAC90047A475 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B75E81F22FAC90047A475 /* Player.m */; };
 		D16B75EF1F22FC990047A475 /* Unit.m in Sources */ = {isa = PBXBuildFile; fileRef = D16B75EE1F22FC990047A475 /* Unit.m */; };
@@ -63,8 +62,6 @@
 		D15EE73B1F295DDB001CE398 /* GameOverNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverNode.h; sourceTree = "<group>"; };
 		D15EE73C1F295DDB001CE398 /* GameOverNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverNode.m; sourceTree = "<group>"; };
 		D166908A1F26CCD500FE430A /* BasicEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicEnemy.h; sourceTree = "<group>"; };
-		D166908E1F26D1C000FE430A /* GameConfigurations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConfigurations.h; sourceTree = "<group>"; };
-		D166908F1F26D1C000FE430A /* GameConfigurations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConfigurations.m; sourceTree = "<group>"; };
 		D16690911F26F0CB00FE430A /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		D16690921F26F0CB00FE430A /* GameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameManager.m; sourceTree = "<group>"; };
 		D16B75E71F22FAC90047A475 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
@@ -137,34 +134,24 @@
 				D15EE73B1F295DDB001CE398 /* GameOverNode.h */,
 				D15EE73C1F295DDB001CE398 /* GameOverNode.m */,
 			);
-			name = Nodes;
+			path = Nodes;
 			sourceTree = "<group>";
 		};
 		D10B47381F2E6B27009E04F6 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D19CC1521F22CA4C00E97820 /* Actions.sks */,
+				D19CC1541F22CA4C00E97820 /* GameScene.h */,
+				D19CC1551F22CA4C00E97820 /* GameScene.m */,
 				D19CC16A1F22CDE500E97820 /* MainMenu.h */,
 				D19CC16B1F22CDE500E97820 /* MainMenu.m */,
 				D1AA318D1F2B000D008AEE89 /* Settings.h */,
 				D1AA318E1F2B000D008AEE89 /* Settings.m */,
-				D19CC1571F22CA4C00E97820 /* GameViewController.h */,
-				D19CC1581F22CA4C00E97820 /* GameViewController.m */,
 				D19CC1501F22CA4C00E97820 /* GameScene.sks */,
 				D19CC1681F22CD3400E97820 /* MainMenu.sks */,
 				D1AA31831F2AFE85008AEE89 /* Settings.sks */,
 			);
-			name = Scenes;
-			sourceTree = "<group>";
-		};
-		D166908D1F26D1AA00FE430A /* Game Settings */ = {
-			isa = PBXGroup;
-			children = (
-				D1CA649A1F26BDB900C40FA7 /* EntityPhysics.h */,
-				D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */,
-				D166908E1F26D1C000FE430A /* GameConfigurations.h */,
-				D166908F1F26D1C000FE430A /* GameConfigurations.m */,
-			);
-			name = "Game Settings";
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		D16B75E61F22FAC00047A475 /* Entities */ = {
@@ -181,12 +168,14 @@
 				D1AA31931F2B6FAF008AEE89 /* HealingEnemy.h */,
 				D1AA31941F2B6FAF008AEE89 /* HealingEnemy.m */,
 			);
-			name = Entities;
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		D16B75F31F261AD80047A475 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D1CA649A1F26BDB900C40FA7 /* EntityPhysics.h */,
+				D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */,
 				D16B76081F265B130047A475 /* AnimationComponent.h */,
 				D16B76091F265B130047A475 /* AnimationComponent.m */,
 				D1FECA841F28001C00DE1B96 /* StatsComponent.h */,
@@ -199,7 +188,7 @@
 				D1A697251F28BFD8002420CE /* BarrierComponent.m */,
 				D1A6971A1F28BEDC002420CE /* ColorState */,
 			);
-			name = Components;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		D19CC13E1F22CA4C00E97820 = {
@@ -222,16 +211,13 @@
 		D19CC1491F22CA4C00E97820 /* Cosurvive */ = {
 			isa = PBXGroup;
 			children = (
-				D19CC1541F22CA4C00E97820 /* GameScene.h */,
-				D19CC1551F22CA4C00E97820 /* GameScene.m */,
 				D16690911F26F0CB00FE430A /* GameManager.h */,
 				D16690921F26F0CB00FE430A /* GameManager.m */,
-				D19CC15A1F22CA4C00E97820 /* Main.storyboard */,
-				D19CC1521F22CA4C00E97820 /* Actions.sks */,
+				D19CC1571F22CA4C00E97820 /* GameViewController.h */,
+				D19CC1581F22CA4C00E97820 /* GameViewController.m */,
 				D16B75F31F261AD80047A475 /* Components */,
 				D16B75E61F22FAC00047A475 /* Entities */,
 				D10448FA1F27D8E10057488D /* Nodes */,
-				D166908D1F26D1AA00FE430A /* Game Settings */,
 				D10B47381F2E6B27009E04F6 /* Scenes */,
 				D19CC14A1F22CA4C00E97820 /* Supporting Files */,
 			);
@@ -241,6 +227,7 @@
 		D19CC14A1F22CA4C00E97820 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D19CC15A1F22CA4C00E97820 /* Main.storyboard */,
 				D19CC1621F22CA4C00E97820 /* Info.plist */,
 				D19CC15F1F22CA4C00E97820 /* LaunchScreen.storyboard */,
 				D19CC14D1F22CA4C00E97820 /* AppDelegate.h */,
@@ -266,7 +253,7 @@
 				D14B007A1F2AB58600DB60D0 /* PurpleState.h */,
 				D14B007B1F2AB58600DB60D0 /* PurpleState.m */,
 			);
-			name = ColorState;
+			path = ColorState;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,7 +350,6 @@
 				D14B00761F2AB57500DB60D0 /* YellowState.m in Sources */,
 				D19CC1561F22CA4C00E97820 /* GameScene.m in Sources */,
 				D16B75E91F22FAC90047A475 /* Player.m in Sources */,
-				D16690901F26D1C000FE430A /* GameConfigurations.m in Sources */,
 				D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */,
 				D1A697231F28BF5F002420CE /* RedState.m in Sources */,
 				D15EE73D1F295DDB001CE398 /* GameOverNode.m in Sources */,
