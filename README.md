@@ -1,7 +1,7 @@
 # **CoSurvive**
 
 # Summary
-CoSurvive is a 2D Survival Game utilizing color and shapes. Multiple shape and color enemies will attempt to destroy you by suicidal collision. Highscore is calculated for the nunmber of enemies defeated.
+CoSurvive is a 2D Survival Game built with SpriteKit and GameplayKit in Objective-C. The game utilizes shapes and colors for its gameplay. Multiple shape and color enemies will attempt to destroy you by suicidal collision. Highscore is calculated for the number of enemies defeated.
 
 
 # Preview
