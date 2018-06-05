@@ -11,7 +11,7 @@
 
 @implementation PhysicsComponent
 
-- (instancetype)initWithPhysicsBody:(SKPhysicsBody*)physicsBody andPhysicsBitMask:(physicsBitMask)physicsBitMask
+- (instancetype)initWithPhysicsBody:(SKPhysicsBody*)physicsBody andPhysicsBitMask:(PhysicsBitMask)physicsBitMask
 {
   self = [super init];
   if (self) {

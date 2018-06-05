@@ -10,29 +10,29 @@
 
 @implementation EntityPhysics
 
-+ (physicsBitMask)player
++ (PhysicsBitMask)player
 {
-  physicsBitMask player;
+  PhysicsBitMask player;
   player.category = playerCategory;
-  player.collision = playerCategory;
-  player.contact = enemyCategory | itemCategory;
+  player.collision = playerCategory | borderCategory;
+  player.contact = enemyCategory;
   
   return player;
 }
 
-+ (physicsBitMask)item
-{
-  physicsBitMask item;
-  item.category = itemCategory;
-  item.collision = noCategory;
-  item.contact = playerCategory;
-  
-  return item;
-}
+//+ (physicsBitMask)item
+//{
+//  physicsBitMask item;
+//  item.category = itemCategory;
+//  item.collision = noCategory;
+//  item.contact = playerCategory;
+//
+//  return item;
+//}
 
-+ (physicsBitMask)redEnemy
++ (PhysicsBitMask)redEnemy
 {
-  physicsBitMask redEnemy;
+  PhysicsBitMask redEnemy;
   redEnemy.category = redEnemyCategory | enemyCategory;
   redEnemy.collision = noCategory;
   redEnemy.contact = playerCategory | redBarrierCategory;
@@ -40,9 +40,9 @@
   return redEnemy;
 }
 
-+ (physicsBitMask)redBarrier
++ (PhysicsBitMask)redBarrier
 {
-  physicsBitMask redBarrier;
+  PhysicsBitMask redBarrier;
   redBarrier.category = redBarrierCategory;
   redBarrier.collision = noCategory;
   redBarrier.contact = redEnemyCategory;
@@ -50,9 +50,9 @@
   return redBarrier;
 }
 
-+ (physicsBitMask)blueEnemy
++ (PhysicsBitMask)blueEnemy
 {
-  physicsBitMask blueEnemy;
+  PhysicsBitMask blueEnemy;
   blueEnemy.category = blueEnemyCategory | enemyCategory;
   blueEnemy.collision = noCategory;
   blueEnemy.contact = playerCategory | blueBarrierCategory;
@@ -60,9 +60,9 @@
   return blueEnemy;
 }
 
-+ (physicsBitMask)blueBarrier
++ (PhysicsBitMask)blueBarrier
 {
-  physicsBitMask blueBarrier;
+  PhysicsBitMask blueBarrier;
   blueBarrier.category = blueBarrierCategory;
   blueBarrier.collision = noCategory;
   blueBarrier.contact = blueEnemyCategory;
@@ -70,9 +70,9 @@
   return blueBarrier;
 }
 
-+ (physicsBitMask)greenEnemy
++ (PhysicsBitMask)greenEnemy
 {
-  physicsBitMask greenEnemy;
+  PhysicsBitMask greenEnemy;
   greenEnemy.category = greenEnemyCategory | enemyCategory;
   greenEnemy.collision = noCategory;
   greenEnemy.contact = playerCategory | greenBarrierCategory;
@@ -80,9 +80,9 @@
   return greenEnemy;
 }
 
-+ (physicsBitMask)greenBarrier
++ (PhysicsBitMask)greenBarrier
 {
-  physicsBitMask greenBarrier;
+  PhysicsBitMask greenBarrier;
   greenBarrier.category = greenBarrierCategory;
   greenBarrier.collision = noCategory;
   greenBarrier.contact = greenEnemyCategory;
@@ -90,9 +90,9 @@
   return greenBarrier;
 }
 
-+ (physicsBitMask)yellowEnemy
++ (PhysicsBitMask)yellowEnemy
 {
-  physicsBitMask yellowEnemy;
+  PhysicsBitMask yellowEnemy;
   yellowEnemy.category = yellowEnemyCategory | enemyCategory;
   yellowEnemy.collision = noCategory;
   yellowEnemy.contact = playerCategory | yellowBarrierCategory;
@@ -100,9 +100,9 @@
   return yellowEnemy;
 }
 
-+ (physicsBitMask)yellowBarrier
++ (PhysicsBitMask)yellowBarrier
 {
-  physicsBitMask yellowBarrier;
+  PhysicsBitMask yellowBarrier;
   yellowBarrier.category = yellowBarrierCategory;
   yellowBarrier.collision = noCategory;
   yellowBarrier.contact = yellowEnemyCategory;
@@ -110,9 +110,9 @@
   return yellowBarrier;
 }
 
-+ (physicsBitMask)orangeEnemy
++ (PhysicsBitMask)orangeEnemy
 {
-  physicsBitMask orangeEnemy;
+  PhysicsBitMask orangeEnemy;
   orangeEnemy.category = orangeEnemyCategory | enemyCategory;
   orangeEnemy.collision = noCategory;
   orangeEnemy.contact = playerCategory | orangeBarrierCategory;
@@ -120,9 +120,9 @@
   return orangeEnemy;
 }
 
-+ (physicsBitMask)orangeBarrier
++ (PhysicsBitMask)orangeBarrier
 {
-  physicsBitMask orangeBarrier;
+  PhysicsBitMask orangeBarrier;
   orangeBarrier.category = orangeBarrierCategory;
   orangeBarrier.collision = noCategory;
   orangeBarrier.contact = orangeEnemyCategory;
@@ -130,9 +130,9 @@
   return orangeBarrier;
 }
 
-+ (physicsBitMask)purpleEnemy
++ (PhysicsBitMask)purpleEnemy
 {
-  physicsBitMask purpleEnemy;
+  PhysicsBitMask purpleEnemy;
   purpleEnemy.category = purpleEnemyCategory | enemyCategory;
   purpleEnemy.collision = noCategory;
   purpleEnemy.contact = playerCategory | purpleBarrierCategory;
@@ -140,9 +140,9 @@
   return purpleEnemy;
 }
 
-+ (physicsBitMask)purpleBarrier
++ (PhysicsBitMask)purpleBarrier
 {
-  physicsBitMask purpleBarrier;
+  PhysicsBitMask purpleBarrier;
   purpleBarrier.category = purpleBarrierCategory;
   purpleBarrier.collision = noCategory;
   purpleBarrier.contact = purpleEnemyCategory;
@@ -150,24 +150,13 @@
   return purpleBarrier;
 }
 
-//+ (physicsBitMask)enemy
-//{
-//  physicsBitMask enemy;
-//  enemy.category = enemyCategory;
-//  enemy.collision = noCategory;
-//  enemy.contact = playerCategory | barrierCategory;
-//  
-//  return enemy;
-//}
-//
-//+ (physicsBitMask)barrier
-//{
-//  physicsBitMask barrier;
-//  barrier.category = barrierCategory;
-//  barrier.collision = noCategory;
-//  barrier.contact = enemyCategory;
-//  
-//  return barrier;
-//}
++ (PhysicsBitMask)border {
+    PhysicsBitMask border;
+    border.category = borderCategory;
+    border.collision = playerCategory | redEnemyCategory | blueEnemyCategory | greenEnemyCategory | yellowEnemyCategory | orangeEnemyCategory | purpleEnemyCategory;
+    border.contact = noCategory;
+    
+    return border;
+}
 
 @end

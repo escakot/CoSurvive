@@ -19,7 +19,7 @@
 
 @implementation HealingEnemy
 
-- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target withPhysics:(physicsBitMask)bitMask inScene:(GameScene*)scene
+- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target withPhysics:(PhysicsBitMask)bitMask inScene:(GameScene*)scene
 {
   self = [super init];
   if (self)

@@ -41,6 +41,7 @@
 		D1CA648D1F26B2DF00C40FA7 /* RenderComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648C1F26B2DF00C40FA7 /* RenderComponent.m */; };
 		D1CA64901F26B59700C40FA7 /* PhysicsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */; };
 		D1CA649C1F26BDB900C40FA7 /* EntityPhysics.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */; };
+		D1E0ED3420BFB2BA0038DB09 /* BorderNode.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E0ED3320BFB2BA0038DB09 /* BorderNode.m */; };
 		D1FECA861F28001C00DE1B96 /* StatsComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1FECA851F28001C00DE1B96 /* StatsComponent.m */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,8 @@
 		D1CA648F1F26B59700C40FA7 /* PhysicsComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhysicsComponent.m; sourceTree = "<group>"; };
 		D1CA649A1F26BDB900C40FA7 /* EntityPhysics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityPhysics.h; sourceTree = "<group>"; };
 		D1CA649B1F26BDB900C40FA7 /* EntityPhysics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityPhysics.m; sourceTree = "<group>"; };
+		D1E0ED3220BFB2BA0038DB09 /* BorderNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BorderNode.h; sourceTree = "<group>"; };
+		D1E0ED3320BFB2BA0038DB09 /* BorderNode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BorderNode.m; sourceTree = "<group>"; };
 		D1FECA841F28001C00DE1B96 /* StatsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsComponent.h; sourceTree = "<group>"; };
 		D1FECA851F28001C00DE1B96 /* StatsComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsComponent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +136,8 @@
 				D1AD38D11F2A13EC00853613 /* ActionNode.m */,
 				D15EE73B1F295DDB001CE398 /* GameOverNode.h */,
 				D15EE73C1F295DDB001CE398 /* GameOverNode.m */,
+				D1E0ED3220BFB2BA0038DB09 /* BorderNode.h */,
+				D1E0ED3320BFB2BA0038DB09 /* BorderNode.m */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -346,6 +351,7 @@
 				D1318B341F2929190010A1C7 /* HealthBarNode.m in Sources */,
 				D19CC14F1F22CA4C00E97820 /* AppDelegate.m in Sources */,
 				D1A697261F28BFD8002420CE /* BarrierComponent.m in Sources */,
+				D1E0ED3420BFB2BA0038DB09 /* BorderNode.m in Sources */,
 				D1AD38CF1F29885100853613 /* ToughEnemy.m in Sources */,
 				D14B00761F2AB57500DB60D0 /* YellowState.m in Sources */,
 				D19CC1561F22CA4C00E97820 /* GameScene.m in Sources */,

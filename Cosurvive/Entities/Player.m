@@ -25,6 +25,7 @@
     
     SKPhysicsBody *playerPhysics = [SKPhysicsBody bodyWithRectangleOfSize:self.size];
     self.physicsComponent = [[PhysicsComponent alloc] initWithPhysicsBody:playerPhysics andPhysicsBitMask:[EntityPhysics player]];
+      self.physicsComponent.physicsBody.allowsRotation = NO;
     [self addComponent:self.physicsComponent];
     
     self.renderComponent.node.physicsBody = self.physicsComponent.physicsBody;
@@ -60,13 +61,11 @@
 
 -(void)updateWithDeltaTime:(NSTimeInterval)seconds
 {
-  
   self.isDead = [self.statsComponent isKilled];
   if (!self.isDead)
   {
     [self.renderComponent updateWithDeltaTime:seconds];
   }
-  
 }
 
 

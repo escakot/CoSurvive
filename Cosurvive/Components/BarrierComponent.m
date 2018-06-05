@@ -33,6 +33,8 @@
     _shape.physicsBody.categoryBitMask = redBarrierCategory;
     _shape.physicsBody.collisionBitMask = 0;
     _shape.physicsBody.contactTestBitMask = redEnemyCategory;
+    _shape.physicsBody.usesPreciseCollisionDetection = YES;
+    _shape.physicsBody.pinned = YES;
     _shape.alpha = 0.4;
     [player.renderComponent.node addChild:_shape];
     _stateMachine = [[GKStateMachine alloc] initWithStates:

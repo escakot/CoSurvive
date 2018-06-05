@@ -17,7 +17,9 @@
   {
     _size = size;
     _greenBar = [[SKSpriteNode alloc] initWithColor:[UIColor greenColor] size:size];
+      _greenBar.physicsBody.pinned = YES;
     _redBar = [[SKSpriteNode alloc] initWithColor:[UIColor redColor] size:size];
+      _redBar.physicsBody.pinned = YES;
     [self addChild:_redBar];
     [self addChild:_greenBar];
   }

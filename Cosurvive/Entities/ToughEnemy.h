@@ -15,6 +15,6 @@
 
 //@property (strong, nonatomic) NSMutableArray* agents;
 
-- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target withPhysics:(physicsBitMask)bitMask inScene:(GameScene*)scene;
+- (instancetype)initWithColor:(UIColor*)color atPosition:(CGPoint)position withTarget:(GKAgent2D*)target withPhysics:(PhysicsBitMask)bitMask inScene:(GameScene*)scene;
 
 @end

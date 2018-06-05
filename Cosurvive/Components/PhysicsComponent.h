@@ -12,6 +12,6 @@
 @interface PhysicsComponent : GKComponent
 
 @property (strong, nonatomic) SKPhysicsBody *physicsBody;
-- (instancetype)initWithPhysicsBody:(SKPhysicsBody*)physicsBody andPhysicsBitMask:(physicsBitMask)physicsBitMask;
+- (instancetype)initWithPhysicsBody:(SKPhysicsBody*)physicsBody andPhysicsBitMask:(PhysicsBitMask)physicsBitMask;
 
 @end
