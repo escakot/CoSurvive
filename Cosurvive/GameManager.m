@@ -37,7 +37,6 @@
     _toughUnitRespawnTime = 1;
     _healingUnitRespawnTime = 5;
     _randomSource = [[GKARC4RandomSource alloc] init];
-    _toughAgents = [[NSMutableArray alloc] init];
   }
   return self;
 }
