@@ -104,9 +104,9 @@
         if ([self.playerShapeButton containsPoint:touchLocation] || [self.shapeNode containsPoint:touchLocation])
         {
             SKShapeNode* currentNode = (SKShapeNode*)[self.shapeNode children].firstObject;
-            self.playerShape = [self.numberOfShapes indexOfObject:currentNode];
+            self.playerShape = [self.numberOfShapes indexOfObject:currentNode] + 1;
             [self.shapeNode removeAllChildren];
-            [self.shapeNode addChild:self.numberOfShapes[(self.playerShape + 1) % self.numberOfShapes.count]];
+            [self.shapeNode addChild:self.numberOfShapes[self.playerShape % self.numberOfShapes.count]];
         }
     }
 }
