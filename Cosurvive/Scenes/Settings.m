@@ -41,7 +41,7 @@
     self.backButton = [SKLabelNode labelNodeWithText:@"< Back"];
     self.backButton.position = CGPointMake(-self.size.width/2 + self.size.width/6, self.size.height/2 - self.size.height/8 - self.backButton.fontSize/2);
     [self addChild:self.backButton];
-    self.numberOfColorsButton = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Number Of Colors: %li", self.numberOfColors]];
+    self.numberOfColorsButton = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Number Of Colors: %li", (long)self.numberOfColors]];
     self.numberOfColorsButton.position = CGPointMake(0, self.size.height/2 - self.size.height/3 - self.numberOfColorsButton.fontSize/2);
     [self addChild:self.numberOfColorsButton];
     self.difficultyButton = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Difficulty: %@", self.difficultyLevels[self.difficulty]]];
@@ -93,7 +93,7 @@
         if ([self.numberOfColorsButton containsPoint:touchLocation])
         {
             self.numberOfColors = self.numberOfColors >= 6 ? 2 : self.numberOfColors + 1;
-            self.numberOfColorsButton.text = [NSString stringWithFormat:@"Number Of Colors: %li", self.numberOfColors];
+            self.numberOfColorsButton.text = [NSString stringWithFormat:@"Number Of Colors: %li", (long)self.numberOfColors];
         }
         if ([self.difficultyButton containsPoint:touchLocation])
         {
@@ -104,9 +104,9 @@
         if ([self.playerShapeButton containsPoint:touchLocation] || [self.shapeNode containsPoint:touchLocation])
         {
             SKShapeNode* currentNode = (SKShapeNode*)[self.shapeNode children].firstObject;
-            self.playerShape = [self.numberOfShapes indexOfObject:currentNode] + 1;
+            self.playerShape = ([self.numberOfShapes indexOfObject:currentNode] + 1) % self.numberOfShapes.count;
             [self.shapeNode removeAllChildren];
-            [self.shapeNode addChild:self.numberOfShapes[self.playerShape % self.numberOfShapes.count]];
+            [self.shapeNode addChild:self.numberOfShapes[self.playerShape]];
         }
     }
 }

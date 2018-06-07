@@ -22,7 +22,7 @@
     _gameOverLabel = [SKLabelNode labelNodeWithText:@"Game Over!"];
     _gameOverLabel.position = CGPointMake(0, _screen.size.height/2 - _screen.size.height/6.5 - _gameOverLabel.fontSize/2);
     [_screen addChild:_gameOverLabel];
-    _scoreLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"High Score: %li", score]];
+      _scoreLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"High Score: %li", (long)score]];
     _scoreLabel.position = CGPointMake(0, _screen.size.height/2 - _screen.size.height/3 - _gameOverLabel.fontSize/2);
     [_screen addChild:_scoreLabel];
     _restartGameButton = [SKLabelNode labelNodeWithText:@"Restart Game"];

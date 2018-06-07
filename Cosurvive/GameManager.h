@@ -32,6 +32,8 @@
 @property (assign, nonatomic) NSInteger toughUnitLimit;
 @property (assign, nonatomic) NSInteger healingUnitLimit;
 
+@property (assign, nonatomic) NSTimeInterval gameStartTime;
+@property (assign, nonatomic) NSTimeInterval currentTime;
 
 @property (assign, nonatomic) NSTimeInterval basicUnitRespawnTime;
 @property (assign, nonatomic) NSTimeInterval basicUnitPreviousSpawnTime;
@@ -45,6 +47,7 @@
 
 + (GameManager *) sharedManager;
 
+- (void)setDifficultyRampWithTime: (float)time;
 - (void)spawnUnitsInScene:(GameScene*)scene players:(NSMutableArray*)players units:(NSMutableDictionary<NSMutableArray*,NSString*>*)enemyUnits time:(NSTimeInterval)delta;
 
 @end

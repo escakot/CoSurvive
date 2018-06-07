@@ -189,11 +189,10 @@
   }
 }
 
--(void)setDifficulty:(NSInteger)difficulty
+-(float)getDifficultyMultiplier
 {
-  _difficulty = difficulty;
   float multiplier;
-  switch (difficulty)
+  switch (self.difficulty)
   {
     case 1:{
       multiplier = 1.5;
@@ -212,12 +211,18 @@
       break;
     }
   }
-  self.basicUnitLimit = ceil(30 * multiplier);
-  self.toughUnitLimit = ceil(10 * multiplier);
-  self.healingUnitLimit = ceil(10 / multiplier);
-  self.basicUnitRespawnTime = (1.0 / multiplier);
-  self.toughUnitRespawnTime = (3.0 / multiplier);
-  self.healingUnitRespawnTime = (5.0 * multiplier);
+  return multiplier;
+}
+
+-(void)setDifficultyRampWithTime: (float)time {
+    float ramp = (time - self.gameStartTime) / 50;
+    float multiplier = [self getDifficultyMultiplier] + ramp;
+    self.basicUnitLimit = ceil(30 * multiplier);
+    self.toughUnitLimit = ceil(10 * multiplier);
+    self.healingUnitLimit = ceil(10 / multiplier);
+    self.basicUnitRespawnTime = (1.0 / multiplier);
+    self.toughUnitRespawnTime = (3.0 / multiplier);
+    self.healingUnitRespawnTime = (5.0 * multiplier);
 }
 
 @end

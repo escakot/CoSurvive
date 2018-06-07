@@ -110,8 +110,9 @@
     
     //Setup border
     CGRect frame = self.scene.frame;
-    CGFloat width = frame.size.width * 3;
-    CGFloat height = frame.size.height * 3;
+    CGFloat difficultyOffset = [GameManager sharedManager].difficulty * 150;
+    CGFloat width = 1000 - difficultyOffset;
+    CGFloat height = 1000 - difficultyOffset;
     frame = CGRectMake(-(width / 2), -(height / 2), width, height);
 //    frame = CGRectMake(200, 200, 50, 50);
     self.border = [[BorderNode alloc] initWithFrame:frame];
@@ -157,7 +158,7 @@
 
     //Score and Health
     self.score = 0;
-    self.scoreLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Score: %li", self.score]];
+    self.scoreLabel = [SKLabelNode labelNodeWithText:[NSString stringWithFormat:@"Score: %lu", (unsigned long)self.score]];
     self.scoreLabel.fontColor = [UIColor whiteColor];
     [self addChild:self.scoreLabel];
     self.healthBar = [[HealthBarNode alloc] initWithSize:CGSizeMake(100.0, 10)];
@@ -230,11 +231,14 @@
     // Initialize _lastUpdateTime if it has not already been
     if (_lastUpdateTime == 0) {
         _lastUpdateTime = currentTime;
+        [GameManager sharedManager].gameStartTime = currentTime;
     }
     
     // Calculate time since last update
+    [GameManager sharedManager].currentTime = currentTime;
     CGFloat dt = currentTime - _lastUpdateTime;
     
+    [[GameManager sharedManager] setDifficultyRampWithTime: currentTime];
     [[GameManager sharedManager] spawnUnitsInScene:self players:self.players units:self.enemyUnits time:dt];
 
     // Update entities
@@ -328,7 +332,7 @@
         NSMutableArray *yTileArray = [[NSMutableArray alloc] init];
         for (int j = 0; j < xTiles; j++)
         {
-            SKSpriteNode *tile = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@%lu", self.chosenBackground, randomTile]]];
+            SKSpriteNode *tile = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:[NSString stringWithFormat:@"%@%ld", self.chosenBackground, (long)randomTile]]];
             //      SKSpriteNode *tile = [[SKSpriteNode alloc] initWithTexture:[SKTexture textureWithImageNamed:@"galaxy"]];
             tile.position = CGPointMake(j * 25 - middleX, middleY - i * 25);
             [yTileArray addObject:tile];
@@ -343,7 +347,7 @@
     Player *player = self.players[0];
     [self.healthBar setHealthBar:(float)player.statsComponent.healthPoints/(float)player.statsComponent.maxHealthPoints];
     self.healthBar.position = CGPointMake(player.renderComponent.node.position.x - self.size.width/2 + self.healthBar.size.width/2 + 30, player.renderComponent.node.position.y + self.size.height/2 - 20);
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %li", self.score];
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %lu", (unsigned long)self.score];
     self.scoreLabel.position = CGPointMake(player.renderComponent.node.position.x + self.size.width/2 - 100
                                            ,player.renderComponent.node.position.y + self.size.height/2 - 50 );
     

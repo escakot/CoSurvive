@@ -131,7 +131,7 @@
       self.isFleeing = NO;
     }
   }
-  if (diffX > width*2 || diffX < -width*2 || diffY > width*2 || diffY < -width*2)
+  if (diffX > width || diffX < -width || diffY > width || diffY < -width)
   {
     self.isDead = YES;
   }
